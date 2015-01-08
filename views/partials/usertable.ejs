@@ -1,9 +1,12 @@
-<table border=1>
-	<tr>
-	<td>Field</td>
-	<td>Content</td>
-	</tr>
+<table class="table">
+	<thead>
+		<tr>
+			<th>Field</th>
+			<th>Content</th>
+		</tr>
+	</thead>
 
+<tbody>
 <% for (var prop in user) { %>
 	<tr>
 	<td>
@@ -13,6 +16,8 @@
 	</td>
 	</tr>
 <% } %>
+
+</tbody>
 
 </table>
 
