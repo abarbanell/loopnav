@@ -3,16 +3,17 @@
   <head>
 		<% include ../partials/head %>
   </head>
-  <body>
+  <body class="container-fluid">
 		<header>
 			<% include ../partials/navbar %>
 		</header>
 
-    <h1><%= title %></h1>
+    <h1 class="jumbotron"><%= title %></h1>
+    <div class="col-sm-8 col-sm-offset-2">
     <p>About <%= title %></p>
 		<p>this is what we are about: </p>
 		<p>navigate some loop api's</p>
-
+    <div>
 		<% include ../partials/bottom %>
   </body>
 </html>
