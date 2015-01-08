@@ -1,3 +1,28 @@
-<h1><%= message %></h1>
-<h2><%= error.status %></h2>
-<pre><%= error.stack %></pre>
+<!DOCTYPE html>
+<html>
+  <head>
+		<% include ../partials/head %>
+  </head>
+  <body class="container">
+		<header>
+			<% include ../partials/navbar %>
+		</header>
+
+		<div class"row">
+			<div class="col-sm-3">
+				<!-- sidebar left -->
+				<p>Error </p>
+			</div>
+
+			<div class="col-sm-9">
+				<!-- main column -->
+				<h1><%= message %></h1>
+				<h2><%= error.status %></h2>
+				<pre><%= error.stack %></pre>
+
+			</div>
+		</div>
+
+		<% include ../partials/bottom %>
+  </body>
+</html>

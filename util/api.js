@@ -17,9 +17,18 @@ var api = function() {
       response.on("end", function (err) {
           // finished transferring data
           // dump the raw data
-          var data = JSON.parse(buffer);
-          callback(null, data);
+					if (err) {
+						callback(err, null);
+					} else { 
+						if (buffer.length) {
+							var data = JSON.parse(buffer);
+							callback(null, data);
+						} else {
+							callback({err: 'empty response'}, null);
+						}
+					}
       }); 
+
     }); 
   };
 
