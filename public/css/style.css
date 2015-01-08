@@ -6,3 +6,7 @@ body {
 a {
   color: #00B7FF;
 }
+
+.navbar-default .navbar-brand {
+	color: #f39501;
+}

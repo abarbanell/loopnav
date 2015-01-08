@@ -11,15 +11,15 @@
 		<div class"row">
 			<div class="col-sm-3">
 				<!-- sidebar left -->
-				<p>Welcome to <%= title %> on left sidebar</p>
+				<p>User <%= user.UserId %> </p>
+				<p><%= user.FirstName %> <%= user.LastName %> </p>
+				<img src=<%= user.ProfilePicture %> />
 			</div>
 
 			<div class="col-sm-9">
 				<!-- main column -->
-					<p>
-						Here we show some of the loop API's integrated into an external website
+				<% include ../partials/usertable %>
 
-					</p>
 			</div>
 		</div>
 

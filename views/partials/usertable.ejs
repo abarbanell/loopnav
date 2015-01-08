@@ -1,0 +1,19 @@
+<table border=1>
+	<tr>
+	<td>Field</td>
+	<td>Content</td>
+	</tr>
+
+<% for (var prop in user) { %>
+	<tr>
+	<td>
+		<%= prop %>
+	</td><td>
+		<%= user[prop] %>
+	</td>
+	</tr>
+<% } %>
+
+</table>
+
+
