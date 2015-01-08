@@ -9,18 +9,23 @@
 		</header>
 
 		<div class"row">
-			<div class="col-sm-3">
-				<!-- sidebar left -->
-				<p>Welcome to <%= title %> on left sidebar</p>
-			</div>
-
 			<div class="col-sm-9">
 				<!-- main column -->
 					<p>
-						Here we show some of the loop API's integrated into an external website
-
+						Here we show some of the loop API's integrated into an 
+            external website
 					</p>
+          <p>
+            Soon you will be able to navigate around a user's data, but
+            let's start with a simple view of 
+            <a href="/user/69">Idan Segev</a>'s profile.
+          </p>
 			</div>
+
+			<div class="col-sm-3">
+        <% include ../partials/adsidebar %>
+			</div>
+
 		</div>
 
 		<% include ../partials/bottom %>
