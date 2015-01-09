@@ -7,3 +7,39 @@
 {"v":0,"level":30,"name":"newrelic","hostname":"tux03","pid":7336,"time":"2015-01-09T18:21:47.630Z","msg":"Starting New Relic for Node.js connection process."}
 {"v":0,"level":30,"name":"newrelic","hostname":"tux03","pid":7336,"time":"2015-01-09T18:21:50.336Z","msg":"Reporting to: https://rpm.newrelic.com/accounts/865646/applications/4690115","component":"new_relic_response"}
 {"v":0,"level":30,"name":"newrelic","hostname":"tux03","pid":7336,"time":"2015-01-09T18:21:50.337Z","msg":"Connected to collector-139.newrelic.com:443 with agent run ID 20199039109787770.","component":"collector_api"}
+{"v":0,"level":30,"name":"newrelic","hostname":"tux03","pid":11184,"time":"2015-01-09T20:14:18.818Z","msg":"Starting New Relic for Node.js connection process."}
+{"v":0,"level":30,"name":"newrelic","hostname":"tux03","pid":11184,"time":"2015-01-09T20:14:22.761Z","msg":"Reporting to: https://rpm.newrelic.com/accounts/865646/applications/4690115","component":"new_relic_response"}
+{"v":0,"level":30,"name":"newrelic","hostname":"tux03","pid":11184,"time":"2015-01-09T20:14:22.762Z","msg":"Connected to collector-139.newrelic.com:443 with agent run ID 20199039110016272.","component":"collector_api"}
+{"v":0,"level":30,"name":"newrelic","hostname":"tux03","pid":11455,"time":"2015-01-09T20:20:15.531Z","msg":"Starting New Relic for Node.js connection process."}
+{"v":0,"level":30,"name":"newrelic","hostname":"tux03","pid":11455,"time":"2015-01-09T20:20:18.459Z","msg":"Reporting to: https://rpm.newrelic.com/accounts/865646/applications/4690115","component":"new_relic_response"}
+{"v":0,"level":30,"name":"newrelic","hostname":"tux03","pid":11455,"time":"2015-01-09T20:20:18.460Z","msg":"Connected to collector-139.newrelic.com:443 with agent run ID 20199039110028351.","component":"collector_api"}
+{"v":0,"level":30,"name":"newrelic","hostname":"tux03","pid":11711,"time":"2015-01-09T20:28:46.659Z","msg":"Starting New Relic for Node.js connection process."}
+{"v":0,"level":30,"name":"newrelic","hostname":"tux03","pid":11711,"time":"2015-01-09T20:28:49.271Z","msg":"Reporting to: https://rpm.newrelic.com/accounts/865646/applications/4690115","component":"new_relic_response"}
+{"v":0,"level":30,"name":"newrelic","hostname":"tux03","pid":11711,"time":"2015-01-09T20:28:49.272Z","msg":"Connected to collector-139.newrelic.com:443 with agent run ID 20199039110045692.","component":"collector_api"}
+{"v":0,"level":30,"name":"newrelic","hostname":"tux03","pid":11929,"time":"2015-01-09T20:37:33.931Z","msg":"Starting New Relic for Node.js connection process."}
+{"v":0,"level":30,"name":"newrelic","hostname":"tux03","pid":11929,"time":"2015-01-09T20:37:37.186Z","msg":"Reporting to: https://rpm.newrelic.com/accounts/865646/applications/4690115","component":"new_relic_response"}
+{"v":0,"level":30,"name":"newrelic","hostname":"tux03","pid":11929,"time":"2015-01-09T20:37:37.187Z","msg":"Connected to collector-139.newrelic.com:443 with agent run ID 20199039110061854.","component":"collector_api"}
+{"v":0,"level":30,"name":"newrelic","hostname":"tux03","pid":11982,"time":"2015-01-09T20:39:46.540Z","msg":"Starting New Relic for Node.js connection process."}
+{"v":0,"level":30,"name":"newrelic","hostname":"tux03","pid":11982,"time":"2015-01-09T20:39:49.359Z","msg":"Reporting to: https://rpm.newrelic.com/accounts/865646/applications/4690115","component":"new_relic_response"}
+{"v":0,"level":30,"name":"newrelic","hostname":"tux03","pid":11982,"time":"2015-01-09T20:39:49.360Z","msg":"Connected to collector-139.newrelic.com:443 with agent run ID 20199039110065715.","component":"collector_api"}
+{"v":0,"level":30,"name":"newrelic","hostname":"tux03","pid":12185,"time":"2015-01-09T20:42:34.046Z","msg":"Starting New Relic for Node.js connection process."}
+{"v":0,"level":30,"name":"newrelic","hostname":"tux03","pid":12185,"time":"2015-01-09T20:42:36.541Z","msg":"Reporting to: https://rpm.newrelic.com/accounts/865646/applications/4690115","component":"new_relic_response"}
+{"v":0,"level":30,"name":"newrelic","hostname":"tux03","pid":12185,"time":"2015-01-09T20:42:36.542Z","msg":"Connected to collector-139.newrelic.com:443 with agent run ID 20199039110072043.","component":"collector_api"}
+{"v":0,"level":30,"name":"newrelic","hostname":"tux03","pid":12394,"time":"2015-01-09T20:47:40.496Z","msg":"Starting New Relic for Node.js connection process."}
+{"v":0,"level":30,"name":"newrelic","hostname":"tux03","pid":12394,"time":"2015-01-09T20:47:43.250Z","msg":"Reporting to: https://rpm.newrelic.com/accounts/865646/applications/4690115","component":"new_relic_response"}
+{"v":0,"level":30,"name":"newrelic","hostname":"tux03","pid":12394,"time":"2015-01-09T20:47:43.251Z","msg":"Connected to collector-139.newrelic.com:443 with agent run ID 20199039110081374.","component":"collector_api"}
+{"v":0,"level":30,"name":"newrelic","hostname":"tux03","pid":12513,"time":"2015-01-09T20:52:17.685Z","msg":"Starting New Relic for Node.js connection process."}
+{"v":0,"level":30,"name":"newrelic","hostname":"tux03","pid":12513,"time":"2015-01-09T20:52:20.508Z","msg":"Reporting to: https://rpm.newrelic.com/accounts/865646/applications/4690115","component":"new_relic_response"}
+{"v":0,"level":30,"name":"newrelic","hostname":"tux03","pid":12513,"time":"2015-01-09T20:52:20.508Z","msg":"Connected to collector-139.newrelic.com:443 with agent run ID 20199039110089586.","component":"collector_api"}
+{"v":0,"level":30,"name":"newrelic","hostname":"tux03","pid":12561,"time":"2015-01-09T20:54:25.989Z","msg":"Starting New Relic for Node.js connection process."}
+{"v":0,"level":30,"name":"newrelic","hostname":"tux03","pid":12561,"time":"2015-01-09T20:54:28.549Z","msg":"Reporting to: https://rpm.newrelic.com/accounts/865646/applications/4690115","component":"new_relic_response"}
+{"v":0,"level":30,"name":"newrelic","hostname":"tux03","pid":12561,"time":"2015-01-09T20:54:28.550Z","msg":"Connected to collector-139.newrelic.com:443 with agent run ID 20199039110092877.","component":"collector_api"}
+{"v":0,"level":30,"name":"newrelic","hostname":"tux03","pid":12706,"time":"2015-01-09T21:00:23.161Z","msg":"Starting New Relic for Node.js connection process."}
+{"v":0,"level":30,"name":"newrelic","hostname":"tux03","pid":12706,"time":"2015-01-09T21:00:26.341Z","msg":"Reporting to: https://rpm.newrelic.com/accounts/865646/applications/4690115","component":"new_relic_response"}
+{"v":0,"level":30,"name":"newrelic","hostname":"tux03","pid":12706,"time":"2015-01-09T21:00:26.342Z","msg":"Connected to collector-139.newrelic.com:443 with agent run ID 20199039110105208.","component":"collector_api"}
+{"v":0,"level":30,"name":"newrelic","hostname":"tux03","pid":12908,"time":"2015-01-09T21:06:48.272Z","msg":"Starting New Relic for Node.js connection process."}
+{"v":0,"level":30,"name":"newrelic","hostname":"tux03","pid":12908,"time":"2015-01-09T21:06:51.197Z","msg":"Reporting to: https://rpm.newrelic.com/accounts/865646/applications/4690115","component":"new_relic_response"}
+{"v":0,"level":30,"name":"newrelic","hostname":"tux03","pid":12908,"time":"2015-01-09T21:06:51.198Z","msg":"Connected to collector-139.newrelic.com:443 with agent run ID 20199039110122021.","component":"collector_api"}
+{"v":0,"level":30,"name":"newrelic","hostname":"tux03","pid":13074,"time":"2015-01-09T21:11:36.686Z","msg":"Starting New Relic for Node.js connection process."}
+{"v":0,"level":30,"name":"newrelic","hostname":"tux03","pid":13074,"time":"2015-01-09T21:11:39.617Z","msg":"Reporting to: https://rpm.newrelic.com/accounts/865646/applications/4690115","component":"new_relic_response"}
+{"v":0,"level":30,"name":"newrelic","hostname":"tux03","pid":13074,"time":"2015-01-09T21:11:39.617Z","msg":"Connected to collector-139.newrelic.com:443 with agent run ID 20199039110130905.","component":"collector_api"}

@@ -1,7 +1,7 @@
 
 var loop_api = function() {
 
-	var api = require('./api.js');
+	var api = require('./cached_api.js');
 
 	var main_info = function(id, callback) {
 		var url = "http://loop.frontiersin.org/api/v1/users/" + id + "/main-info";
