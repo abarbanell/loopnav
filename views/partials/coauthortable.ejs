@@ -1,0 +1,34 @@
+<p> This user has <%= co_authors.length %> coauthors.
+<table class="table">
+	<thead>
+		<tr>
+			<th>Image</th>
+			<th>Name</th>
+			<th>Common Publications</th>
+		</tr>
+	</thead>
+
+<tbody>
+<% co_authors.forEach(function(auth) { %>
+	<tr>
+		<td> 
+			<a href="/user/<%= auth.userId %>" >
+				<img src="<%= auth.profilePicture %>" >
+			</a>
+		</td>
+		<td>
+			<a href="/user/<%= auth.userId %>" >
+				<%= auth.firstName %> <%= auth.middleName %> <%= auth.lastName %>
+			</a>
+		</td> <td>
+			<%= auth.numberOfCommonPublications %>
+		</td>
+	</tr>
+<% }); %>
+
+</tbody>
+
+</table>
+
+
+

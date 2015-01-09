@@ -8,13 +8,35 @@ router.get('/', function(req, res) {
 });
 
 router.get('/user/:id', function(req, res) {
-	loop_api.main_info(req.params.id, function(err, result) {
-		console.log('api call returned.');
+	loop_api.main_info(req.params.id, function(err, minfo) {
+		console.log('main-info api call returned.');
 		if (err) {
-			res.render('pages/error', { title: 'loopnav error', message: 'API call error' , error: {status: JSON.stringify(err), stack: 'no stack information available'}});
+			res.render('pages/error', { 
+				title: 'loopnav error', 
+				message: 'API call error' , 
+				error: {
+					status: JSON.stringify(err), 
+					stack: 'no stack information available'
+				}
+			});
 		} else {
-			console.log('result: ' + result);
-			res.render('pages/user', { title: 'loopnav', user: result });
+			console.log('result: ' + minfo);
+			loop_api.co_authors(req.params.id, function(err, coauth) {
+				console.log('co-authors api call returned.');
+				if (err) {
+					res.render('pages/error', { 
+						title: 'loopnav error', 
+						message: 'API call error' , 
+						error: {
+							status: JSON.stringify(err), 
+							stack: 'no stack information available'
+						}
+					});
+				} else {
+					console.log('result: ' + coauth);
+					res.render('pages/user', { title: 'loopnav', user: minfo, co_authors: coauth });
+				}
+			});
 		}
 	});
 });
