@@ -6,6 +6,8 @@ var cached_api = function() {
   var mongo = require('mongoskin');
   var mongourl = process.env.MONGOLAB_URI || 'mongodb://localhost:27107/loopnav';
   var db = mongo.db(mongourl);
+  var cacheHit = 0;
+  var cacheMiss = 0;
 
   db.collection('apicache').ensureIndex([['url', 1]], 
         true, function(err, replies){});
@@ -16,7 +18,12 @@ var cached_api = function() {
   // get data from API call
   var get = function(options, callback) {
     var cached_callback = function(err, result) {
-      console.log('cached_api.cache_callback');
+      console.log('cached_api.cached_callback');
+      if (err) {
+        console.log('cached_api.cached_callback err:' + JSON.stringify(err));
+        return callback(err, result);
+      }
+      console.log('cached_api.cached_callback payload:' + result);
       var d = new Date();
       var jsondate = d.toJSON();
       db.apicache.insert({
@@ -33,18 +40,21 @@ var cached_api = function() {
         + (options === options.toString()));
     
     if (options === options.toString()) {
-      console.log('cached_api.get: eligible for caching');
       db.apicache.findOne({url: options}, function(err, cachedApi) {
         if (err || !cachedApi) {
+          cacheMiss++;
+          console.log('apicache_log.get: CACHE MISS ' + cacheMiss);
           console.log('apicache.findOne - error:' + err);
           console.log('apicache.findOne - result:' + cachedApi);
           api.get(options, cached_callback);
         } else {
-          console.log('cached_api.get: found, NOT checking for expiry.');
+          cacheHit++;
+          console.log('cached_api.get: CACHE HIT ' + cacheHit);
           callback(null, cachedApi.payload);
         }
       }); 
     } else {
+      console.log('cached_api.get: CACHE BYPASS');
       api.get(options, callback);
     }
   };

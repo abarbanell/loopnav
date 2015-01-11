@@ -12,12 +12,12 @@
 <% co_authors.forEach(function(auth) { %>
 	<tr>
 		<td> 
-			<a href="/user/<%= auth.userId %>" >
+			<a href="/users/<%= auth.userId %>" >
 				<img src="<%= auth.profilePicture %>" >
 			</a>
 		</td>
 		<td>
-			<a href="/user/<%= auth.userId %>" >
+			<a href="/users/<%= auth.userId %>" >
 				<%= auth.firstName %> <%= auth.middleName %> <%= auth.lastName %>
 			</a>
 		</td> <td>

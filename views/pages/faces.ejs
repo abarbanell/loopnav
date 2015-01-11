@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+		<% include ../partials/head %>
+  </head>
+  <body class="container-fluid">
+		<header>
+			<% include ../partials/navbar %>
+		</header>
+
+		<div class"row">
+			<div class="col-sm-3">
+				<!-- sidebar left -->
+				<p>Page begins with <%= users[0].userId %> </p>
+        <button type="button" class="btn btn-default" onclick="window.location.href='/users/table/<%= prevPage %>'" >Previous Page</button>
+        <button type="button" class="btn btn-primary" onclick="window.location.href='/users/table/<%= nextPage %>'" >Next Page</button> 
+			</div>
+
+			<div class="col-sm-6">
+				<!-- main column -->
+          <% users.forEach(function(user, index) { %>
+              <% if (user.status === 'ok-with-pic') { %> <a href="/users/<%= user.userId %>"><img src="<%= user.ProfilePicture %>"></img></a><% } %> 
+          <% }); %>
+      </div>
+
+			<div class="col-sm-3">
+        <% include ../partials/adsidebar %>
+			</div>
+		</div>
+
+		<% include ../partials/bottom %>
+  </body>
+</html>
