@@ -2,6 +2,9 @@
 <html>
   <head>
 		<% include ../partials/head %>
+		<% if (autopilot = true) { %>
+			<meta http-equiv="refresh" content="30;url=/users/table/<%= nextPage %>/auto">
+		<% } %>
   </head>
   <body class="container-fluid">
 		<header>
@@ -13,7 +16,12 @@
 				<!-- sidebar left -->
 				<p>Page begins with <%= users[0].userId %> </p>
         <button type="button" class="btn btn-default" onclick="window.location.href='/users/table/<%= prevPage %>'" >Previous Page</button>
+				<br>
         <button type="button" class="btn btn-primary" onclick="window.location.href='/users/table/<%= nextPage %>'" >Next Page</button> 
+				<br>
+        <button type="button" class="btn btn-default" 
+								onclick="window.location.href='/users/table/<%= nextPage %>/auto'" >Autopilot </button> 
+				<br>
 			</div>
 
 			<div class="col-sm-6">

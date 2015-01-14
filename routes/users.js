@@ -51,6 +51,16 @@ router.get('/:id', function(req, res) {
 });
 
 router.get('/table/:id', function(req, res) {
+	req.params.autopilot=false;
+	return tableRoute(req, res);
+});
+
+router.get('/table/:id/auto', function(req, res) {
+	req.params.autopilot = true;
+	return tableRoute(req, res);
+});
+
+function tableRoute(req, res) {
   var baseId = 1;
   var pageSize = 25;
   if (req.params.id > 1) {
@@ -77,7 +87,7 @@ router.get('/table/:id', function(req, res) {
       nextPage: baseId + pageSize 
     });
   });
-});
+}
 
 var constructUserTable = function(u, b, p, req, res, callback) {
   if (u.length >= p) {
