@@ -84,7 +84,8 @@ function tableRoute(req, res) {
       title: 'loopnav faces', 
       users: users, 
       prevPage: baseId - pageSize, 
-      nextPage: baseId + pageSize 
+      nextPage: baseId + pageSize,
+      autopilot: req.params.autopilot
     });
   });
 }
