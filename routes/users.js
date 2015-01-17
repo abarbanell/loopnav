@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var loop_api = require('../util/loop_api');
+var mq = require('../util/mq');
 
 
 if (!('contains' in String.prototype)) {
@@ -62,18 +63,15 @@ router.get('/table/:id/auto', function(req, res) {
 
 function tableRoute(req, res) {
   var baseId = 1;
-  var pageSize = 25;
+  var pageSize = 5;
   if (req.params.id > 1) {
-    baseId = req.params.id - (req.params.id % pageSize) + 1;
+    baseId = parseInt(req.params.id);
     console.log('router.get: set baseId to ' + baseId);
   }
 
-  if (baseId != req.params.id) {
-    console.log('table called with non-aligned base id ' + req.params.id + ', redirecting to ' + baseId);
-    return res.redirect('/users/table/'+baseId);
-  }
-
   console.log('table called for correct base id (' + baseId + '), filling table now.');
+
+  mq.publish('{"base": "' + baseId + ', "count": "' + pageSize + '}');
 
   // get urls for all users from baseId to (baseid + pagesize -1) 
 
