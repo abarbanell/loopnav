@@ -71,7 +71,7 @@ function tableRoute(req, res) {
 
   console.log('table called for correct base id (' + baseId + '), filling table now.');
 
-  mq.publish('{"base": "' + baseId + ', "count": "' + pageSize + '}');
+  // mq.publish('{"base": "' + baseId + ', "count": "' + pageSize + '}');
 
   // get urls for all users from baseId to (baseid + pagesize -1) 
 
