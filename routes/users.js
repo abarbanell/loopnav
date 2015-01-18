@@ -1,7 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var loop_api = require('../util/loop_api');
-var mq = require('../util/mq');
+// TODO: the following line never returns and makes the web app hang
+// var mq = require('../util/mq');
 
 
 if (!('contains' in String.prototype)) {
