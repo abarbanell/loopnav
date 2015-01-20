@@ -12,6 +12,8 @@ if (!('contains' in String.prototype)) {
 
 function getUserCallback(jsonMsg) {
 	console.log('MQ callback for users: ' + JSON.stringify(jsonMsg));
+	console.log('MQ callback payload:' + jsonMsg.content.toString());
+
 }
 
 /* GET users listing. */
@@ -97,7 +99,7 @@ var constructUserTable = function(u, b, p, req, res, callback) {
   }
   loop_api.main_info(b, function(err, result) {
     if (err) { 
-      u.push({ userId: b, status: 'missing' })
+      u.push({ userId: b, status: 'missing' });
     } else {
       if (result.hasOwnProperty('ProfilePicture') && result.ProfilePicture.toString().contains('Thumb_203_203')) {
         u.push({ userId: b, status: 'ok-with-pic', ProfilePicture: result.ProfilePicture });
@@ -107,6 +109,6 @@ var constructUserTable = function(u, b, p, req, res, callback) {
     }
     return constructUserTable(u, b+1, p, req, res, callback); 
   });
-}
+};
 
 module.exports = router;

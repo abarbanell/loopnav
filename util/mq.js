@@ -19,8 +19,18 @@ var mq = function() {
   };
 
   var consume = function(callback) {
-		callback('{}');	
-    console.log('mq.consume() - not implemented');
+    open.then(function(conn) {
+      process.once('SIGINT', function() { conn.close(); });
+      return conn.createChannel().then(function(ch) {
+        var ok = ch.assertQueue(q);
+        ok = ok.then(function(qok) {
+          return ch.consume(q, callback, {noAck: true});
+        });
+        return ok.then(function(consumeOk) {
+          console.log('mq.consume: waiting for messages');
+        });
+      });
+    }).then(null, console.warn);
   };
 
   var get = function() {
