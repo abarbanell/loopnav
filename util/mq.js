@@ -18,7 +18,8 @@ var mq = function() {
     }).then(null, console.warn);
   };
 
-  var consume = function() {
+  var consume = function(callback) {
+		callback('{}');	
     console.log('mq.consume() - not implemented');
   };
 

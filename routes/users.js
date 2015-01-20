@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var loop_api = require('../util/loop_api');
 var mq = require('../util/mq');
-
+mq.consume(getUserCallback);
 
 if (!('contains' in String.prototype)) {
   String.prototype.contains = function(str, startIndex) {
@@ -10,6 +10,9 @@ if (!('contains' in String.prototype)) {
   };
 }
 
+function getUserCallback(jsonMsg) {
+	console.log('MQ callback for users: ' + JSON.stringify(jsonMsg));
+}
 
 /* GET users listing. */
 router.get('/', function(req, res) {
