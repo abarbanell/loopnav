@@ -20,7 +20,11 @@ var mq = function() {
 
   var consume = function(callback) {
     open.then(function(conn) {
-      process.once('SIGINT', function() { conn.close(); });
+      process.once('SIGINT', function() {
+				console.log('mq.consume: SIGINT received.');
+				conn.close(); 
+				process.exit(130); //128 + signal number, SIGINT = 2
+			});
       return conn.createChannel().then(function(ch) {
         var ok = ch.assertQueue(q);
         ok = ok.then(function(qok) {
