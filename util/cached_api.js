@@ -1,19 +1,14 @@
-
+var db = require('./db.js');
 
 var cached_api = function() {
 
   var api = require('./api');
-  var mongo = require('mongoskin');
-  var mongourl = process.env.MONGOLAB_URI || 'mongodb://localhost:27107/loopnav';
-  var db = mongo.db(mongourl);
   var cacheHit = 0;
   var cacheMiss = 0;
 
   db.collection('apicache').ensureIndex([['url', 1]], 
         true, function(err, replies){});
   db.bind('apicache');
-
-  console.log('mongoskin initialized for: ' + mongourl);
 
   // get data from API call
   var get = function(options, callback) {

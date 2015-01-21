@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var loop_api = require('../util/loop_api');
 var mq = require('../util/mq');
+var users = require('../model/users.js');
 mq.consume(getUserCallback);
 
 if (!('contains' in String.prototype)) {
@@ -13,7 +14,10 @@ if (!('contains' in String.prototype)) {
 function getUserCallback(jsonMsg) {
 	console.log('MQ callback for users: ' + JSON.stringify(jsonMsg));
 	console.log('MQ callback payload:' + jsonMsg.content.toString());
-
+	var userId = jsonMsg.content.base;
+	users.get(userId, function(err, res) {
+		console.log('users.get: err = ' + JSON.stringify(err) + ', res = ' + JSON.stringify(res));
+	});
 }
 
 /* GET users listing. */
