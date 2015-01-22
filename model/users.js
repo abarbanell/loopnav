@@ -10,8 +10,13 @@ var user = function() {
 	}	
 
 	var load = function(base, count, callback) {
+    console.log('model.users.load(): base=' + base + ', count=' + count);
 		for (id = base; id < base + count; id++) {
-			db.user.findOne({userId: id}, callback);
+			db.user.findOne({userId: id}, function(err, res) {
+        if (!res) {
+          console.log('model.users.load(): fetch ' + id + ' from loop_api');
+        }
+      });
 		}
 	}	
 

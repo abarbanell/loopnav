@@ -14,10 +14,11 @@ if (!('contains' in String.prototype)) {
 function getUserCallback(jsonMsg) {
 	console.log('MQ callback response: ' + JSON.stringify(jsonMsg));
 	console.log('MQ callback payload:' + jsonMsg.content.toString());
-	var userId = jsonMsg.content.base || 1;
-	var count = jsonMsg.content.count || 5;
+  var obj = JSON.parse(jsonMsg.content.toString());
+	var userId = obj.base || 1;
+	var count = obj.count || 3;
 	users.load(userId, count, function(err, res) {
-		console.log('users.load - call back executed, nothing to do.');
+		console.log('users.load.callback() - err=' + JSON.stringify(err) + ', res=' + JSON.stringify(res)); 
 	});
 }
 
@@ -83,7 +84,7 @@ function tableRoute(req, res) {
 		console.log('users.get: err = ' + JSON.stringify(err) + ', res = ' + JSON.stringify(result));
 		if (!err && ! result) {
 			// not found
-			mq.publish('{"base": "' + baseId + ', "count": "' + pageSize + '}');
+			mq.publish('{"base": ' + baseId + ', "count": ' + pageSize + '}');
 			// should redirect to refresh page
 		}
 	});
