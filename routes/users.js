@@ -78,9 +78,14 @@ function tableRoute(req, res) {
     console.log('router.get: set baseId to ' + baseId);
   }
 
-  console.log('table called for correct base id (' + baseId + '), filling table now.');
-
-  mq.publish('{"base": "' + baseId + ', "count": "' + pageSize + '}');
+	users.get(baseId, function(err, result) {
+		console.log('users.get: err = ' + JSON.stringify(err) + ', res = ' + JSON.stringify(res));
+		if (!err && ! result) {
+			// not found
+			mq.publish('{"base": "' + baseId + ', "count": "' + pageSize + '}');
+			// should redirect to refresh page
+		}
+	});
 
   // get urls for all users from baseId to (baseid + pagesize -1) 
 
