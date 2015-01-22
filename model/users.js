@@ -9,8 +9,15 @@ var user = function() {
 		db.user.findOne({userId: id}, callback);
 	}	
 
+	var load = function(base, count, callback) {
+		for (id = base; id < base + count; id++) {
+			db.user.findOne({userId: id}, callback);
+		}
+	}	
+
 	return {
-		get: get
+		get: get,
+		load: load
 	}
 }();
 

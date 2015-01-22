@@ -12,11 +12,12 @@ if (!('contains' in String.prototype)) {
 }
 
 function getUserCallback(jsonMsg) {
-	console.log('MQ callback for users: ' + JSON.stringify(jsonMsg));
+	console.log('MQ callback response: ' + JSON.stringify(jsonMsg));
 	console.log('MQ callback payload:' + jsonMsg.content.toString());
-	var userId = jsonMsg.content.base;
-	users.get(userId, function(err, res) {
-		console.log('users.get: err = ' + JSON.stringify(err) + ', res = ' + JSON.stringify(res));
+	var userId = jsonMsg.content.base || 1;
+	var count = jsonMsg.content.count || 5;
+	users.load(userId, count, function(err, res) {
+		console.log('users.load - call back executed, nothing to do.');
 	});
 }
 
@@ -79,7 +80,7 @@ function tableRoute(req, res) {
   }
 
 	users.get(baseId, function(err, result) {
-		console.log('users.get: err = ' + JSON.stringify(err) + ', res = ' + JSON.stringify(res));
+		console.log('users.get: err = ' + JSON.stringify(err) + ', res = ' + JSON.stringify(result));
 		if (!err && ! result) {
 			// not found
 			mq.publish('{"base": "' + baseId + ', "count": "' + pageSize + '}');
@@ -89,12 +90,12 @@ function tableRoute(req, res) {
 
   // get urls for all users from baseId to (baseid + pagesize -1) 
 
-  var users = [];
-  constructUserTable(users, baseId, pageSize, req, res, function(req,res) {
-    console.log('users table filled: ' + JSON.stringify(users));
+  var userTable = [];
+  constructUserTable(userTable, baseId, pageSize, req, res, function(req,res) {
+    console.log('user table filled: ' + JSON.stringify(userTable));
     res.render('pages/faces', { 
       title: 'loopnav faces', 
-      users: users, 
+      users: userTable, 
       prevPage: baseId - pageSize, 
       nextPage: baseId + pageSize,
       autopilot: req.params.autopilot
