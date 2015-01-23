@@ -1,0 +1,49 @@
+{
+    "ace": {
+        "@guessTabSize": "true",
+        "@newLineMode": "unix",
+        "@tabSize": "4",
+        "@useSoftTabs": "true"
+    },
+    "build": {
+        "@builder": "auto",
+        "@path": "/.c9/builders",
+        "@saveall": true
+    },
+    "find.nak": {
+        "@searchLimit": 100
+    },
+    "language": {
+        "@instanceHighlight": "true",
+        "@semi": "true",
+        "@undeclaredVars": "true",
+        "@unusedFunctionArgs": "false",
+        "@warnLevel": "info"
+    },
+    "run": {
+        "@path": "/.c9/runners",
+        "configs": {
+            "@inited": "true",
+            "json()": {
+                "loopnav": {
+                    "command": "foreman start",
+                    "debug": true,
+                    "env": {
+                        "CLOUDAMQP_URL": "amqp://rcxzfebd:lD2xS8BL3yFTN5If6ZabEHpXmuMyREdX@turtle.rmq.cloudamqp.com/rcxzfebd",
+                        "MONGOLAB_URI": "mongodb://heroku_app33107275:cu0l24d1qoebk1ctbflcc1s25l@ds031741.mongolab.com:31741/heroku_app33107275",
+                        "NEW_RELIC_LICENSE_KEY": "b74fe15d8ad31aa0bf6fb9291708651d069e014f",
+                        "NEW_RELIC_LOG": "stdout",
+                        "PAPERTRAIL_API_TOKEN": "S9dqJ4ETmzvGJOTJUS4"
+                    },
+                    "name": "loopnav",
+                    "runner": "Shell command"
+                }
+            }
+        }
+    },
+    "share": {
+        "@app": false,
+        "@preview": false,
+        "@useOwnerSettings": false
+    }
+}

@@ -31,8 +31,6 @@ var cached_api = function() {
       });
     }
     console.log('cached_api.get: ' + options);
-    console.log('cached_api.get: options is string? ' 
-        + (options === options.toString()));
     
     if (options === options.toString()) {
       db.apicache.findOne({url: options}, function(err, cachedApi) {
