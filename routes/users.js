@@ -105,21 +105,25 @@ function tableRoute(req, res) {
 }
 
 var constructUserTable = function(u, b, p, req, res, callback) {
-  if (u.length >= p) {
-    return callback(req,res);
-  }
-  loop_api.main_info(b, function(err, result) {
-    if (err) { 
-      u.push({ userId: b, status: 'missing' });
-    } else {
-      if (result.hasOwnProperty('ProfilePicture') && result.ProfilePicture.toString().contains('Thumb_203_203')) {
-        u.push({ userId: b, status: 'ok-with-pic', ProfilePicture: result.ProfilePicture });
-      } else {
-        u.push({ userId: b, status: 'no-pic' });
-      }
-    }
-    return constructUserTable(u, b+1, p, req, res, callback); 
-  });
+	console.log('router.users.constructUserTable: ' + b + ', ' + p);
+	users.getMultiWithPic(b, p, function(err, resultArray) {
+		console.log('router.users.constructUserTable - got pics: ' + resultArray.length);
+		if (err) {
+					res.render('pages/error', { 
+						title: 'loopnav error', 
+						message: 'Error while retrieving userTable' , 
+						error: {
+							status: JSON.stringify(err), 
+							stack: 'no stack information available'
+						}
+					});
+		}
+		resultArray.forEach(function(item, i, list) {
+			console.log('item '+i+' = ' + JSON.stringify(item));
+			u.push(item);
+		});
+		return callback(req, res);
+	});
 };
 
 module.exports = router;

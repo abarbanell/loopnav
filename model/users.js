@@ -10,6 +10,19 @@ var user = function() {
 		db.user.findOne({userId: id}, callback);
 	};	
 
+	var getMultiWithPic = function(base, count, callback) {
+		db.user.find({ $and: [{ userId: { $gte: base }}, {status: 'ok-with-pic' }] }, null, {
+		    limit: count,
+    		sort: {
+      			'userId': 1
+    		}
+  		}, function (err, resultCursor) {
+  			//map cursor to array.
+  			resultCursor.toArray(callback);
+  		});
+	}
+	
+	
 	var load = function(base, count, callback) {
 	  loadOne(base, count, callback);
 	};
@@ -28,7 +41,10 @@ var user = function() {
 		    console.log('model.users.load(): found ' + base);
 		    console.log('model.users.load(): res = ' + JSON.stringify(res));
 		    //TODO: check for picture and decide next step
-		    return loadOne(base+1, count-1, callback);
+		    if (res.status == 'ok-with-pic') {
+		    		count--;
+		    }
+		    return loadOne(base+1, count, callback);
 		  } else {
 		    console.log('model.users.load(): not found ' + base);
 		    // here we try to get the data from api call
@@ -42,6 +58,7 @@ var user = function() {
         	    if (result.hasOwnProperty('ProfilePicture') && result.ProfilePicture.toString().contains('Thumb_203_203')) {
           		  obj.status = 'ok-with-pic';
         	      obj.ProfilePicture = result.ProfilePicture;
+        	      count--;
       			} else {
         		  obj.status = 'no-pic';
     			}
@@ -51,7 +68,7 @@ var user = function() {
     		    if (err) {
     			  return callback(err, null);
     			} else {
-    			  return loadOne(base+1, count-1, callback);
+    			  return loadOne(base+1, count, callback);
     			}	
     	      });
   			});
@@ -62,6 +79,7 @@ var user = function() {
 
 	return {
 		get: get,
+		getMultiWithPic: getMultiWithPic,
 		load: load
 	}
 }();
