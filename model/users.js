@@ -16,7 +16,7 @@ var user = function() {
 	  
 	var loadOne = function(base, count, callback) {
  	  console.log('model.users.load(): base=' + base + ', count=' + count);
-	  if (count == 0) {
+	  if (count <= 0) {
 		console.log('model.users.loadOne - done');
 		return (callback()); //TODO do we need to pass err and result?
 	  } else {
@@ -34,7 +34,7 @@ var user = function() {
 		    // here we try to get the data from api call
 		    loop_api.main_info(base, function(err, result) {
 		   	  console.log('model.users.loadOne: api result = ' + JSON.stringify(result)) 	
-    		  var obj = {user: base};
+    		  var obj = {userId: base};
     		  if (err || !result) {
     		    // not found
     			obj.status = 'not-found';
@@ -46,7 +46,7 @@ var user = function() {
         		  obj.status = 'no-pic';
     			}
     	      }  
-    	      console.log('model.users.loadOne: status=' + obj.status + ' for id=' + obj.user);
+    	      console.log('model.users.loadOne: status=' + obj.status + ' for id=' + obj.userId);
     	      db.user.save(obj, function(err, res) {
     		    if (err) {
     			  return callback(err, null);
