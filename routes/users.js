@@ -11,6 +11,7 @@ if (!('contains' in String.prototype)) {
   };
 }
 
+// called for each MQ message
 function getUserCallback(jsonMsg) {
 	console.log('MQ callback response: ' + JSON.stringify(jsonMsg));
 	console.log('MQ callback payload:' + jsonMsg.content.toString());
@@ -24,12 +25,11 @@ function getUserCallback(jsonMsg) {
 
 /* GET users listing. */
 router.get('/', function(req, res) {
-  res.send('respond with a resource');
+  res.send('Not Implemented - respond with a resource');
 });
 
 router.get('/:id', function(req, res) {
-  // TODO: check that id is numeric
-	loop_api.main_info(req.params.id, function(err, minfo) {
+	loop_api.main_info(parseInt(req.params.id, 10), function(err, minfo) {
 		console.log('main-info api call returned.');
 		if (err) {
 			res.render('pages/error', { 
@@ -72,13 +72,9 @@ router.get('/table/:id/auto', function(req, res) {
 	return tableRoute(req, res);
 });
 
-function tableRoute(req, res) {
-  var baseId = 1;
-  var pageSize = 5;
-  if (req.params.id > 1) {
-    baseId = parseInt(req.params.id);
-    console.log('router.get: set baseId to ' + baseId);
-  }
+var tableRoute = function(req, res) {
+  var baseId = parseInt(req.params.id, 10) || 1;
+  var pageSize = 15;
 
 	users.get(baseId, function(err, result) {
 		console.log('users.get: err = ' + JSON.stringify(err) + ', res = ' + JSON.stringify(result));
@@ -92,21 +88,8 @@ function tableRoute(req, res) {
   // get urls for all users from baseId to (baseid + pagesize -1) 
 
   var userTable = [];
-  constructUserTable(userTable, baseId, pageSize, req, res, function(req,res) {
-    console.log('user table filled: ' + JSON.stringify(userTable));
-    res.render('pages/faces', { 
-      title: 'loopnav faces', 
-      users: userTable, 
-      prevPage: baseId - pageSize, 
-      nextPage: baseId + pageSize,
-      autopilot: req.params.autopilot
-    });
-  });
-}
-
-var constructUserTable = function(u, b, p, req, res, callback) {
-	console.log('router.users.constructUserTable: ' + b + ', ' + p);
-	users.getMultiWithPic(b, p, function(err, resultArray) {
+	console.log('router.users.constructUserTable: ' + baseId + ', ' + pageSize);
+	users.getMultiWithPic(baseId, pageSize, function(err, resultArray) {
 		console.log('router.users.constructUserTable - got pics: ' + resultArray.length);
 		if (err) {
 					res.render('pages/error', { 
@@ -118,11 +101,29 @@ var constructUserTable = function(u, b, p, req, res, callback) {
 						}
 					});
 		}
-		resultArray.forEach(function(item, i, list) {
-			console.log('item '+i+' = ' + JSON.stringify(item));
-			u.push(item);
-		});
-		return callback(req, res);
+		if (resultArray.length < pageSize) {
+			// not enough results...
+			mq.publish('{"base": ' + baseId + ', "count": ' + pageSize + '}');
+		}
+		if (!resultArray.length) {
+			// no results at all - need to wait for MQ
+	    res.render('pages/refresh', { 
+  	    title: 'loopnav refresh', 
+    	  refreshTime: 5, 
+    	});
+		} else {
+			resultArray.forEach(function(item, i, list) {
+				console.log('item '+i+' = ' + JSON.stringify(item));
+				userTable.push(item);
+			});
+	    res.render('pages/faces', { 
+  	    title: 'loopnav faces', 
+    	  users: userTable, 
+      	prevPage: baseId - pageSize, 
+      	nextPage: baseId + pageSize,
+      	autopilot: req.params.autopilot
+    	});
+		}
 	});
 };
 
