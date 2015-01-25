@@ -11,14 +11,14 @@
 		<div class"row">
 			<div class="col-sm-3">
 				<!-- sidebar left -->
-				<p>Refresh </p>
+				<p>Error </p>
 			</div>
 
 			<div class="col-sm-9">
 				<!-- main column -->
-				<h1>We are getting things ready...</h1>
-				<h2>hand on while we load data</h2>
-				<p>this page will refresh in <%= refreshTime %> seconds.</p>
+				<h1><%= message %></h1>
+				<h2><%= error.status %></h2>
+				<pre><%= error.stack %></pre>
 
 			</div>
 		</div>
