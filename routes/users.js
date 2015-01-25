@@ -109,7 +109,7 @@ var tableRoute = function(req, res) {
 			// no results at all - need to wait for MQ
 	    res.render('pages/refresh', { 
   	    title: 'loopnav refresh', 
-    	  refreshTime: 5, 
+    	  refreshTime: 5
     	});
 		} else {
 			resultArray.forEach(function(item, i, list) {

@@ -1,7 +1,7 @@
 
 var db = require('../util/db');
 db.bind('user');
-db.user.ensureIndex([['userId', 1]], true, function(err, replies){});
+db.user.ensureIndex([['userId', 1]], { unique: true }, function(err, replies){});
 var loop_api = require('../util/loop_api');
 
 var user = function() {
