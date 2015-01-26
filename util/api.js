@@ -23,7 +23,7 @@ var api = function() {
 					} else { 
 						if (buffer.length) {
 							var data = JSON.parse(buffer);
-							console.log('api call returned - ' + (Date.now()-start) + ' ms' );
+							console.log('api call {' + options + '} returned - ' + (Date.now()-start) + ' ms' );
 							callback(null, data);
 						} else {
 							callback({err: 'empty response'}, null);

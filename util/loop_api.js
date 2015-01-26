@@ -2,14 +2,15 @@
 var loop_api = function() {
 
 	var api = require('./cached_api.js');
+	var prefix = process.env.LOOP_API_PREFIX || "http://loop.frontiersin.org/api/v1/users/";
 
 	var main_info = function(id, callback) {
-		var url = "http://loop.frontiersin.org/api/v1/users/" + id + "/main-info";
+		var url = prefix + id + "/main-info";
 		api.get(url, callback);
 	}
 
 	var co_authors = function(id, callback) {
-		var url = "http://loop.frontiersin.org/api/v1/users/" + id + "/co-authors";
+		var url = prefix + id + "/co-authors";
 		api.get(url, callback);
 	}
 
