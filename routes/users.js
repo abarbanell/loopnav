@@ -104,6 +104,7 @@ var tableRoute = function(req, res) {
 		if (resultArray.length < pageSize) {
 			// not enough results...
 			mq.publish('{"base": ' + baseId + ', "count": ' + pageSize + '}');
+			// ... but lets continue with the partial results.
 		}
 		if (!resultArray.length) {
 			// no results at all - need to wait for MQ
@@ -123,6 +124,11 @@ var tableRoute = function(req, res) {
       	nextPage: baseId + pageSize,
       	autopilot: req.params.autopilot
     	});
+		}
+		if (req.params.autopilot) {
+			// prefetch next page
+			var nextpage = parseInt(baseId,10) + parseInt(pageSize, 10);
+			mq.publish('{"base": ' + nextpage + ', "count": ' + pageSize + '}');
 		}
 	});
 };
