@@ -74,7 +74,7 @@ router.get('/table/:id/auto', function(req, res) {
 
 var tableRoute = function(req, res) {
   var baseId = parseInt(req.params.id, 10) || 1;
-  var pageSize = 15;
+  var pageSize = 25;
 
 	users.get(baseId, function(err, result) {
 		console.log('users.get: err = ' + JSON.stringify(err) + ', res = ' + JSON.stringify(result));
@@ -121,7 +121,7 @@ var tableRoute = function(req, res) {
   	    title: 'loopnav faces', 
     	  users: userTable, 
       	prevPage: baseId - pageSize, 
-      	nextPage: baseId + pageSize,
+      	nextPage: userTable[userTable.length-1].userId + 1,
       	autopilot: req.params.autopilot
     	});
 		}

@@ -12,7 +12,7 @@
 		</header>
 
 		<div class"row">
-			<div class="col-sm-3">
+			<div class="col-sm-2">
 				<!-- sidebar left -->
 				<p>Page begins with <%= users[0].userId %> </p>
         <button type="button" class="btn btn-default" onclick="window.location.href='/users/table/<%= prevPage %>'" >Previous Page</button>
@@ -24,18 +24,13 @@
 				<br>
 			</div>
 
-			<div class="col-sm-6">
+			<div class="col-sm-10">
 				<!-- main column -->
           <% users.forEach(function(user, index) { %>
               <% if (user.status === 'ok-with-pic') { %> <a href="/users/<%= user.userId %>"><img src="<%= user.ProfilePicture %>"></img></a><% } %> 
           <% }); %>
       </div>
 
-			<div class="col-sm-3">
-        <% if (!autopilot) { %>
-          <% include ../partials/adsidebar %>
-        <% } %>
-			</div>
 		</div>
 
 		<% include ../partials/bottom %>
