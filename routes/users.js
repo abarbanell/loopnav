@@ -4,6 +4,7 @@ var loop_api = require('../util/loop_api');
 var mq = require('../util/mq');
 var users = require('../model/users.js');
 mq.consume(getUserCallback);
+var lowestGap = 0;
 
 if (!('contains' in String.prototype)) {
   String.prototype.contains = function(str, startIndex) {
@@ -74,7 +75,7 @@ router.get('/table/:id/auto', function(req, res) {
 
 var tableRoute = function(req, res) {
   var baseId = parseInt(req.params.id, 10) || 1;
-  var pageSize = 25;
+  var pageSize = 3;
 
 	users.get(baseId, function(err, result) {
 		console.log('users.get: err = ' + JSON.stringify(err) + ', res = ' + JSON.stringify(result));
@@ -108,6 +109,7 @@ var tableRoute = function(req, res) {
 		}
 		if (!resultArray.length) {
 			// no results at all - need to wait for MQ
+			mq.publish('{"base": ' + baseId + ', "count": ' + pageSize + '}');
 	    res.render('pages/refresh', { 
   	    title: 'loopnav refresh', 
     	  refreshTime: 5
@@ -116,21 +118,42 @@ var tableRoute = function(req, res) {
 			resultArray.forEach(function(item, i, list) {
 				console.log('item '+i+' = ' + JSON.stringify(item));
 				userTable.push(item);
+				if (i==(list.length-1)) {
+					//done, render the page
+					res.render('pages/faces', { 
+  	    		title: 'loopnav faces', 
+    	  		users: userTable, 
+      			prevPage: baseId - pageSize, 
+      			nextPage: userTable[userTable.length-1].userId + 1,
+      			autopilot: req.params.autopilot
+    			});
+				}
 			});
-	    res.render('pages/faces', { 
-  	    title: 'loopnav faces', 
-    	  users: userTable, 
-      	prevPage: baseId - pageSize, 
-      	nextPage: userTable[userTable.length-1].userId + 1,
-      	autopilot: req.params.autopilot
-    	});
 		}
 		if (req.params.autopilot) {
 			// prefetch next page
 			var nextpage = parseInt(baseId,10) + parseInt(pageSize, 10);
 			mq.publish('{"base": ' + nextpage + ', "count": ' + pageSize + '}');
+		} else {
+			prefetch(); 
 		}
 	});
+	
+
+	var prefetch = function() {
+	  console.log('route.users.prefetch: ' + lowestGap);
+		users.get(lowestGap, function(err, result) {
+		console.log('users.get: err = ' + JSON.stringify(err) + ', res = ' + JSON.stringify(result));
+		if (!err && ! result) {
+			console.log('route.users.prefetch: MQ message ' + lowestGap);
+			mq.publish('{"base": ' + lowestGap + ', "count": ' + 50 + '}');
+			lowestGap += 50;
+		} else {
+			lowestGap++;
+		}
+		
+	});	
+	}
 };
 
 module.exports = router;
