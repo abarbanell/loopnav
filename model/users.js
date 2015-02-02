@@ -53,7 +53,7 @@ var user = function() {
     		  var obj = {userId: base};
     		  if (err || !result) {
     		    // not found
-    			obj.status = 'not-found';
+            obj.status = 'not-found';
     		  } else {
         	    if (result.hasOwnProperty('ProfilePicture') && result.ProfilePicture.toString().contains('Thumb_203_203')) {
           		  obj.status = 'ok-with-pic';
