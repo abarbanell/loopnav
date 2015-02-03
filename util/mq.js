@@ -1,15 +1,15 @@
-
+var logger = require('./logger');
 var q = 'profilepic';
 var url = process.env.CLOUDAMQP_URL || "amqp://localhost";
 var channel = require('amqplib').connect(url).then(function(conn) {
-      console.log('mq.publish() - connection open - requesting channel');
+      logger.info('mq.publish() - connection open - requesting channel');
       process.once('SIGINT', function() {
-				console.log('mq.consume: SIGINT received.');
+				logger.info('mq.consume: SIGINT received.');
 				conn.close(); 
 				process.exit(130); //128 + signal number, SIGINT = 2
 			});
       return conn.createChannel(); 
-    }).then(null, console.warn);
+    }).then(null, logger.error());
 
 var mq = function() {
 
@@ -17,7 +17,7 @@ var mq = function() {
       var ok = channel.then(function(ch) {
         ch.assertQueue(q);
         ch.sendToQueue(q, new Buffer(msg));
-        console.log('mq.publish() - msg sent: ' + msg);
+        logger.info('mq.publish() - msg sent: ' + msg);
       });
       return ok;
   };
@@ -29,13 +29,13 @@ var mq = function() {
           return ch.consume(q, callback, {noAck: true});
         });
         return ok.then(function(consumeOk) {
-          console.log('mq.consume: waiting for messages');
+          logger.info('mq.consume: waiting for messages');
         });
       });
   };
 
   var get = function() {
-    console.log('mq.get() - not implemented');
+    logger.info('mq.get() - not implemented');
   };
 
   return {
