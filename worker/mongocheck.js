@@ -41,7 +41,7 @@ function check(id) {
 }
 
 function fill(id) {
-  users.load(id, 2, function(err, res) {
+  users.load(id, 1, function(err, res) {
     if (!err) console.log('id: ' + id + ' - #### FILLED  #### ');
   }); 
 }

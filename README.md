@@ -26,4 +26,5 @@ Need to fix:
 - reduce logging
 - cache expiry
 - user table - add retrieved data and expiry.
+- add logger with configurable log level (but to stdout)
 
