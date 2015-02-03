@@ -17,3 +17,12 @@ LOOP_API_PREFIX        <optional prefix default http://loop.frontiersin.org/api/
 
 all of these can be added as free addons in heroku.
 
+
+Need to fix: 
+- paging backwards
+- detecting end of user list
+- mongocheck: load only 1 per call
+- reduce logging
+- cache expiry
+- user table - add retrieved data and expiry.
+
