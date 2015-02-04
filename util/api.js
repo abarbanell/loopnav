@@ -2,7 +2,8 @@
 var api = function() {
 
 	var http = require('http');
-
+  var logger = require('./logger');
+  
   // get data from API call
   var get = function(options, callback) {
   	var start = Date.now();
@@ -23,7 +24,7 @@ var api = function() {
 					} else { 
 						if (buffer.length) {
 							var data = JSON.parse(buffer);
-							console.log('api call {' + options + '} returned - ' + (Date.now()-start) + ' ms' );
+							logger.info('api call {' + options + '} returned - ' + (Date.now()-start) + ' ms' );
 							callback(null, data);
 						} else {
 							callback({err: 'empty response'}, null);
@@ -35,6 +36,7 @@ var api = function() {
   };
 
 	var post = function(options, callback) {
+		logger.error('api.post - call to non-implemented function');
 		callback({err: 'not implemented'}, null);
 	}
 

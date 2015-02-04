@@ -7,6 +7,7 @@
 var app = require('../app');
 var debug = require('debug')('loopnav:server');
 var http = require('http');
+var logger = require('../util/logger');
 
 /**
  * Get port from environment and store in Express.
@@ -28,7 +29,7 @@ var server = http.createServer(app);
 server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
-console.log('listening to port: ' + port);
+logger.info('listening to port: ' + port);
 
 /**
  * Event listener for HTTP server "error" event.
@@ -42,11 +43,11 @@ function onError(error) {
   // handle specific listen errors with friendly messages
   switch (error.code) {
     case 'EACCES':
-      console.error('Port ' + port + ' requires elevated privileges');
+      logger.error('Port ' + port + ' requires elevated privileges');
       process.exit(1);
       break;
     case 'EADDRINUSE':
-      console.error('Port ' + port + ' is already in use');
+      logger.error('Port ' + port + ' is already in use');
       process.exit(1);
       break;
     default:
@@ -59,5 +60,5 @@ function onError(error) {
  */
 
 function onListening() {
-  debug('Listening on port ' + server.address().port);
+  logger.info('Listening on port ' + server.address().port);
 }

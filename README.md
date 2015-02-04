@@ -13,6 +13,7 @@ NEW_RELIC_LOG:         stdout
 NODE_MODULES_CACHE:    false
 PAPERTRAIL_API_TOKEN:  <your papertrail API token>
 LOOP_API_PREFIX        <optional prefix default http://loop.frontiersin.org/api/v1/users/>
+LOG_LEVEL:             <error|info|debug - default error>
 ```
 
 all of these can be added as free addons in heroku.

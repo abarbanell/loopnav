@@ -30,6 +30,7 @@
                     "debug": true,
                     "env": {
                         "CLOUDAMQP_URL": "amqp://rcxzfebd:lD2xS8BL3yFTN5If6ZabEHpXmuMyREdX@turtle.rmq.cloudamqp.com/rcxzfebd",
+                        "LOG_LEVEL": "info",
                         "MONGOLAB_URI": "mongodb://heroku_app33107275:cu0l24d1qoebk1ctbflcc1s25l@ds031741.mongolab.com:31741/heroku_app33107275",
                         "NEW_RELIC_LICENSE_KEY": "b74fe15d8ad31aa0bf6fb9291708651d069e014f",
                         "NEW_RELIC_LOG": "stdout",
