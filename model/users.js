@@ -3,6 +3,7 @@ var db = require('../util/db');
 db.bind('user');
 db.user.ensureIndex([['userId', 1]], { unique: true }, function(err, replies){});
 var loop_api = require('../util/loop_api');
+var logger = require('../util/logger');
 
 var user = function() {
 
@@ -28,9 +29,9 @@ var user = function() {
 	};
 	  
 	var loadOne = function(base, count, callback) {
- 	  console.log('model.users.load(): base=' + base + ', count=' + count);
+ 	  logger.info('model.users.load(): base=' + base + ', count=' + count);
 	  if (count <= 0) {
-		console.log('model.users.loadOne - done');
+		logger.info('model.users.loadOne - done');
 		return (callback()); //TODO do we need to pass err and result?
 	  } else {
 	  	db.user.findOne({userId: base}, function(err, res) {
@@ -38,18 +39,18 @@ var user = function() {
 		  	return callback(err, null);
 		  }
 		  if (res) {
-		    console.log('model.users.load(): found ' + base);
-		    console.log('model.users.load(): res = ' + JSON.stringify(res));
+		    logger.info('model.users.load(): found ' + base);
+		    logger.info('model.users.load(): res = ' + JSON.stringify(res));
 		    //TODO: check for picture and decide next step
 		    if (res.status == 'ok-with-pic') {
 		    		count--;
 		    }
 		    return loadOne(base+1, count, callback);
 		  } else {
-		    console.log('model.users.load(): not found ' + base);
+		    logger.info('model.users.load(): not found ' + base);
 		    // here we try to get the data from api call
 		    loop_api.main_info(base, function(err, result) {
-		   	  console.log('model.users.loadOne: api result = ' + JSON.stringify(result)) 	
+		   	  logger.info('model.users.loadOne: api result = ' + JSON.stringify(result)) 	
     		  var obj = {userId: base};
     		  if (err || !result) {
     		    // not found
@@ -63,7 +64,7 @@ var user = function() {
         		  obj.status = 'no-pic';
     			}
     	      }  
-    	      console.log('model.users.loadOne: status=' + obj.status + ' for id=' + obj.userId);
+    	      logger.info('model.users.loadOne: status=' + obj.status + ' for id=' + obj.userId);
     	      db.user.save(obj, function(err, res) {
     		    if (err) {
     			  return callback(err, null);

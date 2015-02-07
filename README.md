@@ -23,13 +23,14 @@ Need to fix:
 
 - paging backwards
 - detecting end of user list
-- mongocheck: load only 1 per call
-- reduce logging
+- mongocheck: load only 1 per call (done - to be validated)
+- reduce logging (started)
 - cache expiry
 - user table - add retrieved data and expiry.
-- add logger with configurable log level (but to stdout)
+- add logger with configurable log level (logging to stdout) - (created and started to replace console.log calls)
 - create newrelic custom attributes
 - dockerize environment for offline development
 - refactor and cleanup
 - tests
+- add robots.txt
 
