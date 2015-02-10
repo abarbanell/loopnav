@@ -29,6 +29,9 @@ node_modules
 node_modules/
 bower_components/
 
+# coverage report directory
+coverage/
+
 # Debug log from npm
 npm-debug.log
 
