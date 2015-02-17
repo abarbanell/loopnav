@@ -9,6 +9,7 @@ var sut = require('../util/logger');
 describe('logger tests', function() {
 
 it('check default logger object', function(){
+		expect(sut).to.be.ok();
     expect(sut.error).to.be.an('function');
     expect(sut.info).to.be.an('function');
   });

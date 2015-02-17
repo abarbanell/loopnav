@@ -10,7 +10,7 @@ var channel = require('amqplib').connect(url).then(function(conn) {
 				process.exit(130); //128 + signal number, SIGINT = 2
 			});
       return conn.createChannel(); 
-    }).then(null, logger.error());
+    }).then(null, logger.error('mq - why did we call logger.error() here??'));
 
 var mq = function() {
 

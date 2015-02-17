@@ -1,5 +1,4 @@
 // test that we have connectivity with http module
-// require logger ad check we have function error(), info()
 
 var expect = require('expect.js');
 
