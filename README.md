@@ -21,16 +21,21 @@ all of these can be added as free addons in heroku.
 
 Need to fix: 
 
+- mongocheck: load only 1 per call (done)
+- add logger with configurable log level (logging to stdout) - (done)
+
+- reduce logging (started)
+- tests for util/*.js (in progress)
+
 - paging backwards
 - detecting end of user list
-- mongocheck: load only 1 per call (done - to be validated)
-- reduce logging (started)
 - cache expiry
 - user table - add retrieved data and expiry.
-- add logger with configurable log level (logging to stdout) - (created and started to replace console.log calls)
 - create newrelic custom attributes
 - dockerize environment for offline development
 - refactor and cleanup
-- tests
+- tests for model/*.js
+- tests for routes/*.js
+- tests for bin/www and /server.js
 - add robots.txt
 
