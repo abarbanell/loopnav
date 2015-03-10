@@ -10,13 +10,17 @@ describe('util/db tests', function() {
     var f = function(){};
     expect(f).to.be.an('function');
     expect(f.doesnotexist).to.not.be.an('function'); // should fail
-
+    expect(f.bind).to.be.an('function'); // Function.prototype.bind()
   })
 
   it('check default db object', function(){
 	  expect(sut).to.be.an('function');
-    expect(sut.bind).to.be.an('function'); //TODO - I have no idea why this succeeds 
+    expect(sut.bind).to.be.an('function'); // Function.prototype.bind()
   });
+  
+  it('can we open a DB?', function(){
+    expect("notimplemented").to.not.be.ok()
+  })
   
 });
  

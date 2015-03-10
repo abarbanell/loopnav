@@ -32,6 +32,9 @@ bower_components/
 # coverage report directory
 coverage/
 
+# c9 work dir
+.c9/
+
 # Debug log from npm
 npm-debug.log
 
