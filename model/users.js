@@ -1,9 +1,14 @@
-
+var logger = require('../util/logger');
 var db = require('../util/db');
 db.bind('user');
-db.user.ensureIndex([['userId', 1]], { unique: true }, function(err, replies){});
+db.user.ensureIndex([['userId', 1]], { unique: true }, function(err, replies){
+	if (err) {
+		logger.error(err);
+	}
+	return;
+});
 var loop_api = require('../util/loop_api');
-var logger = require('../util/logger');
+
 
 var user = function() {
 

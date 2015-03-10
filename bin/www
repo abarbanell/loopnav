@@ -28,8 +28,7 @@ var server = http.createServer(app);
 
 server.listen(port);
 server.on('error', onError);
-server.on('listening', onListening);
-logger.info('listening to port: ' + port);
+
 
 /**
  * Event listener for HTTP server "error" event.
