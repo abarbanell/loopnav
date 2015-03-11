@@ -19,7 +19,10 @@ describe('util/db tests', function() {
   });
   
   it('can we open a DB?', function(){
-    expect("notimplemented").to.not.be.ok()
+		var db = sut('mongodb://localhost/test');
+		console.log(db);
+    expect(db).to.be.ok()
+		expect(db.connection).to.be.an('function');
   })
   
 });
