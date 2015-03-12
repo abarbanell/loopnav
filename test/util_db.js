@@ -12,9 +12,13 @@ describe('util/db tests', function() {
 		done();
   })
 
-  it('can we open a DB from mongoskin directly?', function(done){
+  it('open DB from mongoskin directly?', function(done){
 		var mongo = require('mongoskin');
-		var db = mongo.db('mongodb://localhost:27017/test');
+		var db = mongo.db('mongodb://192.168.59.103:27017/test');
+		check_db(db, done);
+	});
+
+	var check_db = function(db, done) {
 		// console.log(db);
     expect(db).to.an('object');
 		expect(db.bind).to.be.an('function');
@@ -22,40 +26,23 @@ describe('util/db tests', function() {
 		expect(db.testcollection).to.be.an('object');
 		expect(db.testcollection.find).to.be.an('function');
 		db.testcollection.find().toArray(function(err, items) {
+			if (err) console.log('err: ' + err);
 			expect(err).to.not.be.ok();
 			expect(items).to.be.an('array');
 			done();
 		});
-	});
+	};
 
-	it('can we open a DB via MONGOLAG_URI in util/db.js?', function(done) {
-		process.env.MONGOLAB_URI = 'mongodb://localhost:27017/test';
+	it('open DB via MONGOLAG_URI in util/db.js?', function(done) {
+		process.env.MONGOLAB_URI = 'mongodb://192.168.59.103:27017/test';
 		var db = require('../util/db');
-    expect(db).to.be.an('object');
-		expect(db.bind).to.be.an('function');
-		db.bind('testcollection');
-		expect(db.testcollection).to.be.an('object');
-		expect(db.testcollection.find).to.be.an('function');
-		db.testcollection.find().toArray(function(err, items) {
-			expect(err).to.not.be.ok();
-			expect(items).to.be.an('array');
-			done();
-		});
+		check_db(db, done);
 	});  
 
-	it('can we open a DB via default connection in util/db.js?', function() {
+	it('open DB via default connection in util/db.js?', function(done) {
 		delete process.env.MONGOLAB_URI;
 		var db = require('../util/db');
-    expect(db).to.be.an('object');
-		expect(db.bind).to.be.an('function');
-		db.bind('testcollection');
-		expect(db.testcollection).to.be.an('object');
-		expect(db.testcollection.find).to.be.an('function');
-		db.testcollection.find().toArray(function(err, items) {
-			expect(err).to.not.be.ok();
-			expect(items).to.be.an('array');
-			done();
-		});
+		check_db(db, done);
 	});  
 });
  

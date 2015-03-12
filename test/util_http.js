@@ -23,6 +23,8 @@ describe('http tests', function() {
 			});
 			response.on('error', function(err) {
 				console.log("Got error: " + e.message);
+				expect(err).to.no.be.ok();
+				done();
 			});
 			response.on('end', function(err) {
 				expect(err).to.not.be.ok();
