@@ -75,12 +75,9 @@ var cached_api = function() {
 
 
   // connect to DB
-  var db = require('./db.js')(function(err, result){
-    if (err) {
-      logger.error('cached_api - could not open db: ' + err);
-    } else {
+  var db = require('./db.js');
       db.bind('apicache');
-      db.collection('apicache').ensureIndex([['url', 1]], 
+      db.apicache.ensureIndex([['url', 1]], 
         true, function(err, replies){
           if (err) {
             logger.error('db.apicache.ensureIndex error: ' + err);
@@ -88,8 +85,6 @@ var cached_api = function() {
             return (null, lrc);
           }
       });
-    } 
-  });
 
 
 }();

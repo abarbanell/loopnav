@@ -18,6 +18,30 @@ LOG_LEVEL:             <error|info|debug - default error>
 
 all of these can be added as free addons in heroku.
 
+# Test environment
+
+Development should be possible on a local workstation or on a cloud IDE like c9.io
+
+## setup for MacOS
+
+We will run MongoDB and RabbitMQ locally using Docker. 
+Logging will be to stdout, no papertrail connected.
+
+Setup: 
+
+- get [kitematic](https://kitematic.com/) as a docker UI, this also installs docker-machine and Virtualbox if necessary.
+- actually no need to run kitematic - it is still in beta and there are sometimes UI Problems.
+- "docker-machine start" to start up a docker machine on a local virtualbox.
+- "docker-machine ip" to get the ip of the machine
+
+
+## setup for c9.io
+
+
+## setup for Linux 
+
+
+
 
 Need to fix: 
 

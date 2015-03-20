@@ -2,25 +2,46 @@
 // also check some basic mongo / mongoskin fucntionality to make sure we have connectivity
 
 var expect = require('expect.js');
-
-var sut = require('../util/db');
+var mongo_url = process.env.TEST_MONGO_URL; 
 
 describe('util/db tests', function() {
-  it('check some syntax of expect.js', function() {
-    var f = function(){};
-    expect(f).to.be.an('function');
-    expect(f.doesnotexist).to.not.be.an('function'); // should fail
-    expect(f.bind).to.be.an('function'); // Function.prototype.bind()
-  })
+	
+	it('test mongo url defined?', function(done) {
+		expect(mongo_url).to.contain('mongodb');
+		done();
+	});
 
-  it('check default db object', function(){
-	  expect(sut).to.be.an('function');
-    expect(sut.bind).to.be.an('function'); // Function.prototype.bind()
-  });
-  
-  it('can we open a DB?', function(){
-    expect("notimplemented").to.not.be.ok()
-  })
-  
+  it('open DB from mongoskin directly?', function(done){
+		var mongo = require('mongoskin');
+		var db = mongo.db(mongo_url);
+		check_db(db, done);
+	});
+
+	var check_db = function(db, done) {
+		// console.log(db);
+    expect(db).to.an('object');
+		expect(db.bind).to.be.an('function');
+		db.bind('testcollection');
+		expect(db.testcollection).to.be.an('object');
+		expect(db.testcollection.find).to.be.an('function');
+		db.testcollection.find().toArray(function(err, items) {
+			if (err) console.log('err: ' + err);
+			expect(err).to.not.be.ok();
+			expect(items).to.be.an('array');
+			done();
+		});
+	};
+
+	it('open DB via MONGOLAG_URI in util/db.js?', function(done) {
+		process.env.MONGOLAB_URI = mongo_url;
+		var db = require('../util/db');
+		check_db(db, done);
+	});  
+
+	it('open DB via default connection in util/db.js?', function(done) {
+		delete process.env.MONGOLAB_URI;
+		var db = require('../util/db');
+		check_db(db, done);
+	});  
 });
  
