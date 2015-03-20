@@ -29,8 +29,8 @@ Logging will be to stdout, no papertrail connected.
 
 Setup: 
 
-- get [kitematic](https://kitematic.com/) as a docker UI, this also installs docker-machine and Virtualbox if necessary.
-- actually no need to run kitematic - it is still in beta and there are sometimes UI Problems.
+- get [VirtualBox](https://www.virtualbox.org/wiki/Downloads).
+- get [docker machine](https://docs.docker.com/machine/). Follow the install directions on this page
 - "docker-machine start" to start up a docker machine on a local virtualbox.
 - "docker-machine ip" to get the ip of the machine
 
