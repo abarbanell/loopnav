@@ -29,10 +29,9 @@ Logging will be to stdout, no papertrail connected.
 
 Setup: 
 
-- get [VirtualBox](https://www.virtualbox.org/wiki/Downloads).
-- get [docker machine](https://docs.docker.com/machine/). Follow the install directions on this page
-- "docker-machine start" to start up a docker machine on a local virtualbox.
-- "docker-machine ip" to get the ip of the machine
+- get [mongodb.docker](https://bitbucket.org/tabarbanell/mongodb.docker/src)
+- do some magic to get a rabbitmq docker container
+- "boot2docker ip" to get the ip of the virtual machine
 
 
 ## setup for c9.io

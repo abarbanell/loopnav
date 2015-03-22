@@ -2,41 +2,61 @@ var logger = require('./logger');
 
 var q = 'profilepic';
 var url = process.env.CLOUDAMQP_URL || "amqp://localhost";
-var channel = require('amqplib').connect(url).then(function(conn) {
-      logger.info('mq.publish - connection open - requesting channel');
-      process.once('SIGINT', function() {
-				logger.info('mq.consume - SIGINT received - close and exit.');
-				conn.close(); 
-				process.exit(130); //128 + signal number, SIGINT = 2
-			});
-      return conn.createChannel(); 
-    }).then(null, logger.error);
+
+var amqp = require('amqplib/callback_api');
+var connection = null;
+var channel = null; 
+
+
+function bail(err, conn) {
+	logger.error(err);
+	if (conn) {
+		conn.close( function() { 
+			logger.error('mq connection closed')
+		});
+	};
+};
 
 var mq = function() {
 
   var publish = function(msg) {
-      var ok = channel.then(function(ch) {
-        ch.assertQueue(q);
-        ch.sendToQueue(q, new Buffer(msg));
-        logger.info('mq.publish - msg sent: ' + msg);
-      });
-      return ok;
-  };
+
+			if (connection && channel) {
+				channel.sendToQueue(q, Buffer(msg));
+				return;
+			}
+
+			amqp.connect(function(err, conn) {
+				if (err) {
+					bail(err);
+					return;
+				};
+				connection = conn;
+
+				function on_channel_open(err, ch) {
+					if (err) {
+						bail(err, conn);	
+						return;
+					}
+					channel = ch;
+					ch.AssertQueue(q, {durable: false}, function(err, ok) {
+						if (err) bail(err, conn);
+						ch.sendToQueue(q, Buffer(msg));
+						logger.info('[MQ] sent: ' + msg);
+					});
+				};
+				conn.CreateChannel(on_channel_open);
+			});
+	};
 
   var consume = function(callback) {
-      return channel.then(function(ch) {
-        var ok = ch.assertQueue(q);
-        ok = ok.then(function(qok) {
-          return ch.consume(q, callback, {noAck: true});
-        });
-        return ok.then(function(consumeOk) {
-          logger.info('mq.consume - waiting for messages');
-        });
-      });
+    logger.error('mq.get - not implemented');
+		callback({err: 'mq.get - not implemented'}, null);
   };
 
-  var get = function() {
+  var get = function(callback) {
     logger.error('mq.get - not implemented');
+		callback({err: 'mq.get - not implemented'}, null);
   };
 
   return {
