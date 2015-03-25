@@ -13,7 +13,31 @@ describe('util/mq tests', function() {
 		expect(mq).to.be.an('object');
 		expect(mq.publish).to.be.an('function');
 		expect(mq.consume).to.be.an('function');
+		expect(mq.get).to.be.an('function');
 		process.env.CLOUDAMQP_URL = amqp_url;
+		done();
+	});
+
+  it('open mq with environment var', function(done){
+		expect(process.env.CLOUDAMQP_URL).to.be.an('string');
+		var mq = require('../util/mq');
+		expect(mq).to.be.an('object');
+		expect(mq.publish).to.be.an('function');
+		expect(mq.consume).to.be.an('function');
+		expect(mq.get).to.be.an('function');
+		done();
+	});
+
+  it('publish obj to mq' , function(done){
+		expect(process.env.CLOUDAMQP_URL).to.be.an('string');
+		var mq = require('../util/mq');
+		expect(mq).to.be.an('object');
+		expect(mq.publish).to.be.an('function');
+		expect(mq.consume).to.be.an('function');
+		expect(mq.get).to.be.an('function');
+		var msg = { description: "test" };
+	  mq.publish(msg);
+		// we really do not know whether this succeeded...
 		done();
 	});
 

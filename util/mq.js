@@ -50,8 +50,8 @@ var mq = function() {
 	};
 
   var consume = function(callback) {
-    logger.error('mq.get - not implemented');
-		callback({err: 'mq.get - not implemented'}, null);
+    logger.error('mq.consume - not implemented');
+		callback({err: 'mq.consume - not implemented'}, null);
   };
 
   var get = function(callback) {
