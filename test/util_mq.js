@@ -10,6 +10,7 @@ describe('util/mq tests', function() {
   it('open mq without environment var', function(done){
 		delete process.env.CLOUDAMQP_URL;
 		var mq = require('../util/mq');
+		mq.init();
 		expect(mq).to.be.an('object');
 		expect(mq.publish).to.be.an('function');
 		expect(mq.consume).to.be.an('function');
@@ -21,6 +22,7 @@ describe('util/mq tests', function() {
   it('open mq with environment var', function(done){
 		expect(process.env.CLOUDAMQP_URL).to.be.an('string');
 		var mq = require('../util/mq');
+		mq.init();
 		expect(mq).to.be.an('object');
 		expect(mq.publish).to.be.an('function');
 		expect(mq.consume).to.be.an('function');
@@ -30,15 +32,20 @@ describe('util/mq tests', function() {
 
   it('publish obj to mq' , function(done){
 		expect(process.env.CLOUDAMQP_URL).to.be.an('string');
+		console.log('CLOUDAMQP_URL: ' + process.env.CLOUDAMQP_URL);
 		var mq = require('../util/mq');
+		mq.init();
 		expect(mq).to.be.an('object');
 		expect(mq.publish).to.be.an('function');
 		expect(mq.consume).to.be.an('function');
 		expect(mq.get).to.be.an('function');
 		var msg = { description: "test" };
-	  mq.publish(msg);
-		// we really do not know whether this succeeded...
-		done();
+	  mq.publish(msg, function(err,res){
+			expect(err).to.not.be.ok();
+			expect(res).to.be.an('object');
+			expect(res.rc).to.eql(true);
+			done();
+		});
 	});
 
 });

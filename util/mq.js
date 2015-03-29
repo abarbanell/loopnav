@@ -1,48 +1,58 @@
 var logger = require('./logger');
 
-var q = 'profilepic';
-var url = process.env.CLOUDAMQP_URL || "amqp://localhost";
 
-var amqp = require('amqplib/callback_api');
-var connection = null;
-var channel = null; 
-
-
-function bail(err, conn) {
-	logger.error(err);
-	if (conn) {
-		conn.close( function() { 
-			logger.error('mq connection closed')
-		});
-	};
-};
 
 var mq = function() {
+	var q = 'profilepic';
 
-  var publish = function(msg) {
+	var amqp = require('amqplib/callback_api');
+	var url = null;
+	var connection = null;
+	var channel = null; 
+
+	function bail(err, conn) {
+		logger.error(err);
+		if (conn) {
+			conn.close( function() { 
+				logger.error('mq connection closed')
+			});
+		};
+	};
+
+	var init = function() {
+		url = process.env.CLOUDAMQP_URL || "amqp://localhost";
+		if (connection) {
+			connection.close();
+			connection = null;
+		}
+	}
+
+  var publish = function(msg, callback) {
 
 			if (connection && channel) {
-				channel.sendToQueue(q, Buffer(msg));
-				return;
+				var lrc = channel.sendToQueue(q, Buffer(msg));
+				return callback(null, { rc: lrc });
 			}
 
+			logger.info('trying to connect to: ' + url);
 			amqp.connect(function(err, conn) {
-				if (err) {
+				if (err !== null) {
 					bail(err);
-					return;
+					return callback(err, null);;
 				};
 				connection = conn;
 
 				function on_channel_open(err, ch) {
-					if (err) {
+					if (err !== null) {
 						bail(err, conn);	
-						return;
+						return callback(err, null);;
 					}
 					channel = ch;
 					ch.AssertQueue(q, {durable: false}, function(err, ok) {
 						if (err) bail(err, conn);
-						ch.sendToQueue(q, Buffer(msg));
+						var lrc = ch.sendToQueue(q, Buffer(msg));
 						logger.info('[MQ] sent: ' + msg);
+						return callback(null, { rc: lrc });
 					});
 				};
 				conn.CreateChannel(on_channel_open);
@@ -60,6 +70,7 @@ var mq = function() {
   };
 
   return {
+		init: init,
     publish: publish,
     consume: consume,
     get: get
