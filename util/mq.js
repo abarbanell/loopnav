@@ -35,7 +35,7 @@ var mq = function() {
 			}
 
 			logger.info('trying to connect to: ' + url);
-			amqp.connect(function(err, conn) {
+			amqp.connect(url, function(err, conn) {
 				if (err !== null) {
 					bail(err);
 					return callback(err, null);;
@@ -48,14 +48,18 @@ var mq = function() {
 						return callback(err, null);;
 					}
 					channel = ch;
-					ch.AssertQueue(q, {durable: false}, function(err, ok) {
-						if (err) bail(err, conn);
+					ch.assertQueue(q, {durable: false}, function(err, ok) {
+						if (err) {
+							bail(err, conn);
+							return callback(err, null);
+						}
+						logger.info('[MQ] to send: ' + msg);
 						var lrc = ch.sendToQueue(q, Buffer(msg));
 						logger.info('[MQ] sent: ' + msg);
 						return callback(null, { rc: lrc });
 					});
 				};
-				conn.CreateChannel(on_channel_open);
+				conn.createChannel(on_channel_open);
 			});
 	};
 
