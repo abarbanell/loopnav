@@ -25,13 +25,20 @@ var mq = function() {
 			connection.close();
 			connection = null;
 		}
-	}
+	};
+
+	function doSend(ch, msg, callback) {
+		logger.info('[MQ] to send: ' + msg);
+		var lrc = ch.sendToQueue(q, Buffer(msg));
+		logger.info('[MQ] sent: ' + msg);
+		return callback(null, { rc: lrc });
+	};	
 
   var publish = function(msg, callback) {
 
 			if (connection && channel) {
 				var lrc = channel.sendToQueue(q, Buffer(msg));
-				return callback(null, { rc: lrc });
+				return doSend(channel, msg, callback);
 			}
 
 			logger.info('trying to connect to: ' + url);
@@ -53,10 +60,7 @@ var mq = function() {
 							bail(err, conn);
 							return callback(err, null);
 						}
-						logger.info('[MQ] to send: ' + msg);
-						var lrc = ch.sendToQueue(q, Buffer(msg));
-						logger.info('[MQ] sent: ' + msg);
-						return callback(null, { rc: lrc });
+						return doSend(ch, msg, callback);
 					});
 				};
 				conn.createChannel(on_channel_open);
