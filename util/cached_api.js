@@ -64,17 +64,13 @@ var cached_api = function() {
 
 	var post = function(options, callback) {
     logger.info('cached_api.post: ' + options);
+		logger.info('TODO: expire cache on POST');
 		api.post(options, callback);
 	};
 
-  // need to return this after db connection is established
-	var lrc = { 
-		get: get,
-		post: post
-	};
 
-
-  // connect to DB
+  // connect to DB - but this is asynch and needs to be checked for success, 
+	// currently it is fire and forget... :( 
   var db = require('./db.js');
       db.bind('apicache');
       db.apicache.ensureIndex([['url', 1]], 
@@ -82,9 +78,14 @@ var cached_api = function() {
           if (err) {
             logger.error('db.apicache.ensureIndex error: ' + err);
           } else {
-            return (null, lrc);
+            return (null, replies);
           }
       });
+
+	return { 
+		get: get,
+		post: post
+	};
 
 
 }();
