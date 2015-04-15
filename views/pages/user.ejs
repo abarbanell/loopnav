@@ -2,6 +2,19 @@
 <html>
   <head>
 		<% include ../partials/head %>
+
+	<!-- loop badge script -->
+  <script>
+     	(function(w, d, t, s) {
+     		var a = d.createElement(t),
+     	    	m = d.getElementsByTagName(t)[0];
+     		a.async = 1;
+     		a.type = 'text/javascript';
+     		a.src = s;
+     		m.parentNode.insertBefore(a, m)
+     	})(window, document, 'script', '//loop.frontiersin.org/social/badgescript');
+  </script>
+
   </head>
   <body class="container-fluid">
 		<header>
@@ -17,6 +30,11 @@
 			</div>
 
 			<div class="col-sm-6">
+
+				<!-- loop badge -->
+				<div class="loop-embedded-badge" data-badge-type="profile" 
+					data-user-id=”<%= user.UserId %>”>
+				</div>
 				<!-- main column -->
 				<% include ../partials/usertable %>
 				<% include ../partials/coauthortable %>
