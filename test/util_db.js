@@ -32,7 +32,7 @@ describe('util/db tests', function() {
 		});
 	};
 
-	it('open DB via MONGOLAG_URI in util/db.js?', function(done) {
+	it('open DB via MONGOLAB_URI in util/db.js?', function(done) {
 		process.env.MONGOLAB_URI = mongo_url;
 		var db = require('../util/db');
 		check_db(db, done);
