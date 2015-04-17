@@ -1,3 +1,4 @@
+var logger = require('../util/logger');
 var express = require('express');
 var router = express.Router();
 var loop_api = require('../util/loop_api');
@@ -31,7 +32,7 @@ router.get('/', function(req, res) {
 
 router.get('/:id', function(req, res) {
 	loop_api.main_info(parseInt(req.params.id, 10), function(err, minfo) {
-		console.log('main-info api call returned.');
+		logger.info('main-info api call returned.');
 		if (err) {
 			res.render('pages/error', { 
 				title: 'loopnav error', 
@@ -42,9 +43,9 @@ router.get('/:id', function(req, res) {
 				}
 			});
 		} else {
-			console.log('result: ' + minfo);
+			logger.info('result: ' + minfo);
 			loop_api.co_authors(req.params.id, function(err, coauth) {
-				console.log('co-authors api call returned.');
+				logger.info('co-authors api call returned.');
 				if (err) {
 					res.render('pages/error', { 
 						title: 'loopnav error', 
@@ -55,7 +56,7 @@ router.get('/:id', function(req, res) {
 						}
 					});
 				} else {
-					console.log('result: ' + coauth);
+					logger.info('result: ' + coauth);
 					res.render('pages/user', { title: 'loopnav', user: minfo, co_authors: coauth });
 				}
 			});
@@ -78,7 +79,7 @@ var tableRoute = function(req, res) {
   var pageSize = 24;
 
 	users.get(baseId, function(err, result) {
-		console.log('users.get: err = ' + JSON.stringify(err) + ', res = ' + JSON.stringify(result));
+		logger.info('users.get: err = ' + JSON.stringify(err) + ', res = ' + JSON.stringify(result));
 		if (!err && ! result) {
 			// not found
 			// mq.publish('{"base": ' + baseId + ', "count": ' + pageSize + '}');
@@ -89,9 +90,9 @@ var tableRoute = function(req, res) {
   // get urls for all users from baseId to (baseid + pagesize -1) 
 
   var userTable = [];
-	console.log('router.users.constructUserTable: ' + baseId + ', ' + pageSize);
+	logger.info('router.users.constructUserTable: ' + baseId + ', ' + pageSize);
 	users.getMultiWithPic(baseId, pageSize, function(err, resultArray) {
-		console.log('router.users.constructUserTable - got pics: ' + resultArray.length);
+		logger.info('router.users.constructUserTable - got pics: ' + resultArray.length);
 		if (err) {
 					res.render('pages/error', { 
 						title: 'loopnav error', 
@@ -116,7 +117,7 @@ var tableRoute = function(req, res) {
     	});
 		} else {
 			resultArray.forEach(function(item, i, list) {
-				console.log('item '+i+' = ' + JSON.stringify(item));
+				logger.info('item '+i+' = ' + JSON.stringify(item));
 				userTable.push(item);
 				if (i==(list.length-1)) {
 					//done, render the page
@@ -141,11 +142,11 @@ var tableRoute = function(req, res) {
 	
 
 	var prefetch = function() {
-	  console.log('route.users.prefetch: ' + lowestGap);
+	  logger.info('route.users.prefetch: ' + lowestGap);
 		users.get(lowestGap, function(err, result) {
-		console.log('users.get: err = ' + JSON.stringify(err) + ', res = ' + JSON.stringify(result));
+		logger.info('users.get: err = ' + JSON.stringify(err) + ', res = ' + JSON.stringify(result));
 		if (!err && ! result) {
-			console.log('route.users.prefetch: MQ message ' + lowestGap);
+			logger.info('route.users.prefetch: MQ message ' + lowestGap);
 			// mq.publish('{"base": ' + lowestGap + ', "count": ' + 50 + '}');
 			lowestGap += 50;
 		} else {
