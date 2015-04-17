@@ -44,7 +44,7 @@ var cached_api = function() {
           var apidate = new Date(cachedApi.retrieved);
           logger.info('now: ' + now);
           logger.info('apidate: ' + apidate);
-          logger.info('expiry' + cacheExpiry);
+          logger.info('expiry: ' + cacheExpiry);
           logger.info('cache age: ' + (now - apidate));
           if (cachedApi.retrieved && ((now-apidate) < cacheExpiry)) {
             cacheHit++;
@@ -64,7 +64,6 @@ var cached_api = function() {
 
 	var post = function(options, callback) {
     logger.info('cached_api.post: ' + options);
-		logger.info('TODO: expire cache on POST');
 		api.post(options, callback);
 	};
 
