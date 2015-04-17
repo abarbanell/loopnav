@@ -29,9 +29,9 @@ Logging will be to stdout, no papertrail connected.
 
 Setup: 
 
-- get [mongodb.docker](https://bitbucket.org/tabarbanell/mongodb.docker/src)
-- do some magic to get a rabbitmq docker container
-- "boot2docker ip" to get the ip of the virtual machine
+- get [boot2docker](https://github.com/boot2docker/osx-installer/releases/tag/v1.6.0) 
+  and [docker.compose](https://docs.docker.com/compose/install/)
+- get [devenv.sh](https://bitbucket.org/abarbanell/loopnav.devenv) and start environment
 
 
 ## setup for c9.io
