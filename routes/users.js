@@ -76,7 +76,7 @@ router.get('/table/:id/auto', function(req, res) {
 
 var tableRoute = function(req, res) {
   var baseId = parseInt(req.params.id, 10) || 1;
-  var pageSize = 24;
+  var pageSize = 6;
 
 	users.get(baseId, function(err, result) {
 		logger.info('users.get: err = ' + JSON.stringify(err) + ', res = ' + JSON.stringify(result));

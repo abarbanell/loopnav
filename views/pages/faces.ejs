@@ -5,6 +5,7 @@
 		<% if (autopilot) { %>
 			<meta http-equiv="refresh" content="15;url=/users/table/<%= nextPage %>/auto">
 		<% } %>
+		<% include ../partials/loopscript %>
   </head>
   <body class="container-fluid">
 		<header>
@@ -27,7 +28,13 @@
 			<div class="col-sm-10">
 				<!-- main column -->
           <% users.forEach(function(user, index) { %>
-              <% if (user.status === 'ok-with-pic') { %> <a href="/users/<%= user.userId %>"><img src="<%= user.ProfilePicture %>"></img></a><% } %> 
+              <% if (user.status === 'ok-with-pic') { %> 
+								<a href="/users/<%= user.userId %>"><img src="<%= user.ProfilePicture %>"></img></a>
+											<!-- loop badge -->
+								<div class="loop-embedded-badge" data-badge-type="profile" 
+									data-user-id=”69”>
+								</div>	
+							<% } %> 
           <% }); %>
       </div>
 
