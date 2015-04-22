@@ -27,11 +27,12 @@
 
 			<div class="col-sm-8">
 				<!-- main column -->
-					<table>
+					<table class="table">
 					<thead>
 					<td>Loop badge</td>
 					<td>Loop ID</td>
 					</thead>
+					<tbody>
           <% users.forEach(function(user, index) { %>
               <% if (user.status === 'ok-with-pic') { %> 
 								<tr>
@@ -48,6 +49,7 @@
 								</tr>
 							<% } %> 
           <% }); %>
+					</tbody>
 					</table>
       </div>
 			
