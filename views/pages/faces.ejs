@@ -27,15 +27,28 @@
 
 			<div class="col-sm-8">
 				<!-- main column -->
+					<table>
+					<thead>
+					<td>Loop badge</td>
+					<td>Loop ID</td>
+					</thead>
           <% users.forEach(function(user, index) { %>
               <% if (user.status === 'ok-with-pic') { %> 
-								<a href="/users/<%= user.userId %>"><img src="<%= user.ProfilePicture %>"></img></a>
+								<tr>
+								<td>
 											<!-- loop badge -->
 								<div class="loop-embedded-badge" data-badge-type="profile" 
-									data-user-id=”69”>
+									data-user-id="<%= user.userId %>" >
 								</div>	
+								<td>
+									<a href="/users/<%= user.userId %>" >
+										<%= user.userId %>
+									</a>
+								</td>
+								</tr>
 							<% } %> 
           <% }); %>
+					</table>
       </div>
 			
 			<% if (!autopilot) { %>
