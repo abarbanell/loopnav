@@ -1,6 +1,7 @@
 // test that we have successful api calls
 
 var expect = require('expect.js');
+var nock = require('nock');
 
 var api = require('../util/cached_api');
 
@@ -13,6 +14,7 @@ describe('cached api tests', function() {
   });
 
 	it('check api.get', function(done){
+		nock('http://loop.frontiersin.org').get('/api/v1/users/79/main-info').reply(200, { data: 'OK' });
     expect(api.get).to.be.an('function');
 		var options = "http://loop.frontiersin.org/api/v1/users/79/main-info";
 		var obj = api.get(options, function(err, res) {
