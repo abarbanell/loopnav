@@ -35,6 +35,9 @@ coverage/
 # c9 work dir
 .c9/
 
+# VS code settings dir
+.settings/
+
 # Debug log from npm
 npm-debug.log
 

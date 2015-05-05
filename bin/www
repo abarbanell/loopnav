@@ -1,4 +1,4 @@
-#!/usr/bin/env node
+// -- this is breaking in VS code debugger #!/usr/bin/env node
 
 /**
  * Module dependencies.
