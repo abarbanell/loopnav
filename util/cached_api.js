@@ -17,15 +17,20 @@ var cached_api = function() {
         logger.error('cached_api.cached_callback err:' + JSON.stringify(err));
         return callback(err, result);
       }
-      logger.info('cached_api.cached_callback payload:' + result);
+      logger.info('cached_api.cached_callback payload:' + JSON.stringify(result));
       var d = new Date();
       var jsondate = d.toJSON();
-      db.apicache.insert({
+      db.apicache.update(
+			{ url: options },
+			{
         url: options,
         payload: result,
         retrieved: jsondate,
-      }, function(err) {
+      }, 
+			{ upsert: true, multi: false }, 
+			function(err) {
         logger.info('apicache insert - err: ' + err);
+				logger.info('retrieved timestamp: ' + jsondate);
         callback(err,result);
       });
     };
@@ -46,9 +51,10 @@ var cached_api = function() {
           var now = new Date();
           var apidate = new Date(cachedApi.retrieved);
           logger.info('now: ' + now);
-          logger.info('apidate: ' + apidate);
+          logger.info('apidate: ' + apidate + ' - from cachedApi.retrieved = ' + cachedApi.retrieved);
           logger.info('expiry: ' + cacheExpiry);
           logger.info('cache age: ' + (now - apidate));
+					logger.info('cache object: ' + JSON.stringify(cachedApi));
           if (cachedApi.retrieved && ((now-apidate) < cacheExpiry)) {
             cacheHit++;
             logger.info('cached_api.get: CACHE HIT ' + cacheHit);
