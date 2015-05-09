@@ -77,7 +77,7 @@ var cached_api = function() {
   var db = require('./db.js');
       db.bind('apicache');
       db.apicache.ensureIndex([['url', 1]], 
-        true, function(err, replies){
+        { unique: true } , function(err, replies){
           if (err) {
             logger.error('db.apicache.ensureIndex error: ' + err);
           } else {
