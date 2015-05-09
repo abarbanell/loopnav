@@ -5,10 +5,12 @@ var cached_api = function() {
   var logger = require('./logger');
   var cacheHit = 0;
   var cacheMiss = 0;
+	var cacheExpired = 0;
   var cacheExpiry = process.env.CACHE_EXPIRY || 60*60*24*7*1000; // in milliseconds, equals 7 days
 
   // get data from API call
   var get = function(options, callback) {
+		// function to wrap callback function so that it saves to cache before returning
     var cached_callback = function(err, result) {
       logger.info('cached_api.cached_callback');
       if (err) {
@@ -26,7 +28,8 @@ var cached_api = function() {
         logger.info('apicache insert - err: ' + err);
         callback(err,result);
       });
-    }
+    };
+
     logger.info('cached_api.get: ' + options);
     
     if (options === options.toString()) {
@@ -51,7 +54,8 @@ var cached_api = function() {
             logger.info('cached_api.get: CACHE HIT ' + cacheHit);
             return callback(null, cachedApi.payload);
           } else {
-            logger.info('cached_api.get: expired or no retrieve date set');
+						cacheExpired++;
+            logger.info('cached_api.get: CACHE EXPIRED ' + cacheExpired);
             return api.get(options, cached_callback);
           }
         }

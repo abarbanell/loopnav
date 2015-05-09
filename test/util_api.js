@@ -20,6 +20,7 @@ describe('api tests', function() {
 			expect(err).to.not.be.ok();
 			expect(res).to.be.ok();
 			expect(res.data).to.be.eql('OK');
+			nock.cleanAll();
       done();
 		});
   });
