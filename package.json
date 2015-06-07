@@ -22,6 +22,8 @@
     "mongoskin": "^1.4.4",
     "morgan": "~1.5.1",
     "newrelic": "^1.14.5",
+    "passport": "^0.2.2",
+    "passport-oauth2": "^1.1.2",
     "serve-favicon": "~2.2.0",
     "winston": "^0.8.3"
   },
