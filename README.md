@@ -3,6 +3,11 @@ README for loopnav
 
 this is a small express 4.x / EJS application to call some loop API's
 
+* The main use is as a testbed for my own experiments, do not expect
+anything production-ready. *
+
+## Setup 
+
 to setup the runtime environment you need to set these variables:
 
 ```
@@ -36,29 +41,11 @@ Setup:
 
 ## setup for c9.io
 
+todo ...
+
 
 ## setup for Linux 
 
+todo ...
 
-
-
-Need to fix: 
-
-- mongocheck: load only 1 per call (done)
-- add logger with configurable log level (logging to stdout) - (done)
-
-- reduce logging (started)
-- tests for util/*.js (in progress)
-
-- paging backwards
-- detecting end of user list
-- cache expiry
-- user table - add retrieved data and expiry.
-- create newrelic custom attributes
-- dockerize environment for offline development
-- refactor and cleanup
-- tests for model/*.js
-- tests for routes/*.js
-- tests for bin/www and /server.js
-- add robots.txt
 
