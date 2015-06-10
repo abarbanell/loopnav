@@ -3,9 +3,8 @@ README for loopnav
 
 "loopnav" is the loop navigator - it uses API's from the [loop research
 network](http://loop.frontiersin.org) to show data from loop. Learn
-more about the [loop Developer
-Platform](https://loop-developers.frontiersin.org/) in this
-[announcement](https://twitter.com/FrontiersIn/status/601405991654182912).
+more here about the [loop Developer
+Platform](https://loop-developers.frontiersin.org/).
 
 This is a small express 4.x / EJS application to call some loop API's
 
