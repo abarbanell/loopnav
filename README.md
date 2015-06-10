@@ -3,6 +3,10 @@ README for loopnav
 
 this is a small express 4.x / EJS application to call some loop API's
 
+You can see it running at http://loopnav.herokuapp.com - please bear
+in mind that this may require 30sec to wake up if the application
+has not been used recently.
+
 The main use is as a testbed for my own experiments, do not expect
 anything production-ready. 
 
