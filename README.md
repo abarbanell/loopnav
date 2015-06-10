@@ -3,8 +3,8 @@ README for loopnav
 
 this is a small express 4.x / EJS application to call some loop API's
 
-* The main use is as a testbed for my own experiments, do not expect
-anything production-ready. *
+The main use is as a testbed for my own experiments, do not expect
+anything production-ready. 
 
 ## Setup 
 
