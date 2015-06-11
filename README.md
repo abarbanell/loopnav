@@ -44,7 +44,7 @@ We will run MongoDB and RabbitMQ locally using
 
 Setup: 
 
-- get [boot2docker](https://github.com/boot2docker/osx-installer/releases/tag/v1.6.0) 
+- get [boot2docker](https://github.com/boot2docker/osx-installer/releases) 
   and [docker.compose](https://docs.docker.com/compose/install/)
 - get [devenv.sh](https://github.com/abarbanell/devenv)
 
