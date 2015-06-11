@@ -40,6 +40,12 @@ Development should be possible on a local workstation or on a cloud IDE like c9.
 
 We will run MongoDB and RabbitMQ locally using Docke, see my project [abarbanell/devenv](https://github.com/abarbanell/devenv). 
 
+Setup: 
+
+- get [boot2docker](https://github.com/boot2docker/osx-installer/releases/tag/v1.6.0) 
+  and [docker.compose](https://docs.docker.com/compose/install/)
+- get [devenv.sh](https://github.com/abarbanell/devenv)
+
 Papertrail (logging) and New Relic (Monitoring) may be enabled if you have an account, otherwise just go like this:
 
 
@@ -67,11 +73,16 @@ git pull
 
 ```
 
-Setup: 
+if these settings are ok for you (and you have installed the
+[devenv](https://github.com/abarbanell/devenv) under $HOME/github)
+then you can just use the script loopnav.env:
 
-- get [boot2docker](https://github.com/boot2docker/osx-installer/releases/tag/v1.6.0) 
-  and [docker.compose](https://docs.docker.com/compose/install/)
-- get [devenv.sh](https://bitbucket.org/abarbanell/loopnav.devenv) and start environment
+```
+$ source loopnav.env
+```
+
+otherwise you can modify this script as required.
+
 
 
 ## setup for c9.io
