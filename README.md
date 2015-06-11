@@ -30,7 +30,7 @@ LOOP_API_PREFIX        <optional prefix default http://loop.frontiersin.org/api/
 LOG_LEVEL:             <error|info|debug - default error>
 ```
 
-all of these can be added as free addons in heroku.
+all of these can be added as free addons in [heroku](http://www.heroku.com).
 
 # Test environment
 
@@ -38,8 +38,34 @@ Development should be possible on a local workstation or on a cloud IDE like c9.
 
 ## setup for MacOS
 
-We will run MongoDB and RabbitMQ locally using Docker. 
-Logging will be to stdout, no papertrail connected.
+We will run MongoDB and RabbitMQ locally using Docke, see my project [abarbanell/devenv](https://github.com/abarbanell/devenv). 
+
+Papertrail (logging) and New Relic (Monitoring) may be enabled if you have an account, otherwise just go like this:
+
+
+```
+#!/bin/sh
+
+# set up docker engine for mongo and rabbit
+$HOME/github/abarbanell/devenv/devenv.sh up
+export DOCKER_HOST=`boot2docker ip`
+
+export CLOUDAMQP_URL=amqp://${DOCKER_HOST}"
+export MONGOLAB_URI="mongodb://${DOCKER_HOST}:27017/loopnav"
+export NEW_RELIC_LICENSE_KEY=NONE
+export NEW_RELIC_LOG=stdout
+export NODE_MODULES_CACHE=false
+export PAPERTRAIL_API_TOKEN=NONE
+export LOOP_API_PREFIX="http://loop.frontiersin.org/api/v1/"
+export LOG_LEVEL=info
+
+export TEST_MONGO_URL="mongodb://${DOCKER_HOST}:27017/test"
+export TEST_RABBITMQ_URL="amqp://${DOCKER_HOST}"
+
+cd $HOME/bitbucket/abarbanell/loopnav
+git pull
+
+```
 
 Setup: 
 
