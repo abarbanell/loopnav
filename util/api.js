@@ -8,6 +8,7 @@ var api = function() {
   var get = function(options, callback) {
   	var start = Date.now();
     var request = http.get(options, function (response) {
+			console.log("Got response: " + response.statusCode);
       // data is streamed in chunks from the server
       // so we have to handle the "data" event    
       var buffer = "";
@@ -16,23 +17,25 @@ var api = function() {
           buffer += chunk;
       }); 
 
-      response.on("end", function (err) {
+      response.on("end", function () {
           // finished transferring data
           // dump the raw data
-					if (err) {
-						callback(err, null);
-					} else { 
-						if (buffer.length) {
-							var data = JSON.parse(buffer);
-							logger.info('api call {' + options + '} returned - ' + (Date.now()-start) + ' ms' );
-							callback(null, data);
-						} else {
-							callback({err: 'empty response'}, null);
-						}
+					if (buffer.length) {
+						var data = JSON.parse(buffer);
+						logger.info('api call {' + options + '} returned - ' + (Date.now()-start) + ' ms' );
+						callback(null, data);
+					} else {
+						callback({
+							error: "Empty response"
+						}, null);
 					}
       }); 
 
     }); 
+		request.on('error', function(err) {
+			callback({ error: 'connection error' }, null);
+		});
+
   };
 
 	var post = function(options, callback) {

@@ -35,6 +35,33 @@ describe('api tests', function() {
 		});
   });
 
+	it('check api.get 404 NOT FOUND', function(done){
+		nock('http://loop.frontiersin.org').get('/not-existing-route').reply(404);
+    expect(api.get).to.be.an('function');
+		var options = "http://loop.frontiersin.org/not-existing-route";
+		var obj = api.get(options, function(err, res) {
+			console.log('err: ' + JSON.stringify(err));
+			console.log('res: ' + JSON.stringify(res));
+			expect(err).to.be.ok();
+			expect(res).to.not.be.ok();
+			nock.cleanAll();
+      done();
+		});
+  });
+
+	it('check api.get connection error', function(done){
+		nock('http://loop.frontiersin.org').get('/not-existing-route').replyWithError('OhMyGod!');
+    expect(api.get).to.be.an('function');
+		var options = "http://loop.frontiersin.org/not-existing-route";
+		var obj = api.get(options, function(err, res) {
+			console.log('err: ' + JSON.stringify(err));
+			console.log('res: ' + JSON.stringify(res));
+			expect(err).to.be.ok();
+			expect(res).to.not.be.ok();
+			nock.cleanAll();
+      done();
+		});
+  });
 
 });
  
