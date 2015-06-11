@@ -38,7 +38,9 @@ Development should be possible on a local workstation or on a cloud IDE like c9.
 
 ## setup for MacOS
 
-We will run MongoDB and RabbitMQ locally using Docke, see my project [abarbanell/devenv](https://github.com/abarbanell/devenv). 
+We will run MongoDB and RabbitMQ locally using
+[Docker](https://www.docker.com/), see my project
+[abarbanell/devenv](https://github.com/abarbanell/devenv).
 
 Setup: 
 
