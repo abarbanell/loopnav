@@ -37,6 +37,7 @@ coverage/
 
 # VS code settings dir
 .settings/
+typings/
 
 # Debug log from npm
 npm-debug.log
