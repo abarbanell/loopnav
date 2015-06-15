@@ -34,6 +34,7 @@ router.get('/:id', function(req, res) {
 	loop_api.main_info(parseInt(req.params.id, 10), function(err, minfo) {
 		logger.info('main-info api call returned.');
 		if (err) {
+			logger.error('error in main-info call: ' + err);
 			res.render('pages/error', { 
 				title: 'loopnav error', 
 				message: 'API call error' , 
@@ -47,6 +48,7 @@ router.get('/:id', function(req, res) {
 			loop_api.co_authors(req.params.id, function(err, coauth) {
 				logger.info('co-authors api call returned.');
 				if (err) {
+					logger.error('error in co-author call: ' + err);
 					res.render('pages/error', { 
 						title: 'loopnav error', 
 						message: 'API call error' , 
@@ -56,7 +58,7 @@ router.get('/:id', function(req, res) {
 						}
 					});
 				} else {
-					logger.info('result: ' + coauth);
+					logger.info('co-author api call result: ' + coauth);
 					res.render('pages/user', { title: 'loopnav', user: minfo, co_authors: coauth });
 				}
 			});

@@ -72,7 +72,11 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
-
+// TODO: this should not be necessary....
+app.use(function(req, res, next) {
+  res.locals.session = req.session;
+  next();
+});
 // set up routes - AFTER passport setup
 var routes = require('./routes/index');
 var users = require('./routes/users');
