@@ -35,6 +35,35 @@ describe('cached api tests', function() {
 		});
   });
 
+	it('check api.get with Cache MISS', function(done){
+		console.log('Cache Miss test not implemented');
+		done();
+	});
+
+	it('check api.get with Cache EXPIRY', function(done){
+		console.log('Cache Expiry test not implemented');
+		done();
+	});
+
+	it('check api.get with Cache HIT', function(done){
+		console.log('Cache HIT test not implemented');
+		done();
+	});
+
+	it('check api.get with Cache BYPASS', function(done){
+		console.log('Cache BYPASS test not implemented');
+		done();
+	});
+
+	it('check api.get with Mongo Success', function(done){
+		console.log('Mongo Success test not implemented');
+		done();
+	});
+
+	it('check api.get with Mongo Error', function(done){
+		console.log('Mongo Error test not implemented');
+		done();
+	});
 
 });
  
