@@ -2,7 +2,7 @@
 var loop_api = function() {
 	var logger = require('./logger');
 	var api = require('./cached_api.js');
-	var prefix = process.env.LOOP_API_PREFIX || "http://loop.frontiersin.org/api/v1/users/";
+	var prefix = process.env.LOOP_API_PREFIX || "http://loop.frontiersin.org/api/v1/";
 
 	logger.info('loop_api URL prefix = ' + prefix);
 	
