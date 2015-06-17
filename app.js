@@ -1,6 +1,9 @@
 /// <reference path="typings/node/node.d.ts"/>
 if (process.env.NEWRELIC_LICENSE_KEY && (process.env.NEWRELIC_LICENSE_KEY != 'NONE')) {
 	var newrelic = require('newrelic');
+  console.log('new relic should be initialized now.')
+} else {
+  console.log('new relic is switched off');
 };
 var express = require('express');
 var path = require('path');
