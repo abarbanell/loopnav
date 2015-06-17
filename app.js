@@ -75,6 +75,7 @@ app.use(passport.session());
 // TODO: this should not be necessary....
 app.use(function(req, res, next) {
   res.locals.session = req.session;
+	logger.info('session: ' + JSON.stringify(req.session));
   next();
 });
 // set up routes - AFTER passport setup

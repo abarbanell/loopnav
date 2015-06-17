@@ -13,7 +13,7 @@ router.get('/callback', function(req, res) {
 /* show the login page */
 router.get('/login', function(req, res) {
   logger.info('route GET auth/login');
-	res.render('pages/index', { title: 'GET - this should be the login page' } );
+	res.render('pages/authlogin', { title: 'loopnav: connect with loop' } );
 });
 
 /* POST from the login page */
