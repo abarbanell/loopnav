@@ -1,5 +1,5 @@
 /// <reference path="typings/node/node.d.ts"/>
-if (process.env.NEWRELIC_LICENSE_KEY && (process.env.NEWRLEIC_LICENSE_KEY != 'NONE')) {
+if (process.env.NEWRELIC_LICENSE_KEY && (process.env.NEWRELIC_LICENSE_KEY != 'NONE')) {
 	var newrelic = require('newrelic');
 };
 var express = require('express');
@@ -111,7 +111,7 @@ if (app.get('env') === 'development') {
     });
 } else {
     // production error handler
-    // no stacktraces leaked to user
+    // no stacktraces leaked to user.
     app.use(function (err, req, res, next) {
         logger.error('production error route called');
         res.status(err.status || 500);
