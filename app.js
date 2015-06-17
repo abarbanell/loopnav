@@ -1,5 +1,5 @@
 /// <reference path="typings/node/node.d.ts"/>
-if (process.env.NEWRELIC_LICENSE_KEY && (process.env.NEWRELIC_LICENSE_KEY != 'NONE')) {
+if (process.env.NEW_RELIC_LICENSE_KEY && (process.env.NEW_RELIC_LICENSE_KEY != 'NONE')) {
 	var newrelic = require('newrelic');
   console.log('new relic should be initialized now.')
 } else {
