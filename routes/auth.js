@@ -10,7 +10,7 @@ router.get('/callback', function(req, res) {
   res.render('pages/authcallback', { title: 'Loopnav Auth Callback' } );
 });
 
-/* show the login page */
+/* show the login page  - TOD: need to authenticate before rendering */
 router.get('/login', function(req, res) {
   logger.info('route GET auth/login');
 	res.render('pages/authlogin', { title: 'loopnav: connect with loop' } );
