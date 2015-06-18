@@ -27,7 +27,7 @@ function findById(id, done) {
   done(null, user); 
 }
 
-passport.use(new OAuth2Strategy({
+passport.use('oauth2', new OAuth2Strategy({
     authorizationURL: 'https://registration.frontiersin.org/oauth2/auth',
     tokenURL: 'https://registration.frontiersin.org/oauth2/token',
     clientID: process.env.LOOP_CLIENT_ID,
