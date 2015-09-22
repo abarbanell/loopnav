@@ -44,4 +44,4 @@ npm-debug.log
 
 # heroku / foreman .env file
 .env
-
+.env.test
