@@ -20,7 +20,7 @@ describe('util/db tests', function() {
 
 	var check_db = function(db, done) {
 		// console.log(db);
-		expect(db).to.an('object');
+		expect(db).to.be.an('object');
 		expect(db.bind).to.be.an('function');
 		db.bind('testcollection');
 		expect(db.testcollection).to.be.an('object');
