@@ -39,7 +39,7 @@ var api = function() {
   };
 
 	var post = function(options, callback) {
-		logger.error('api.post - call to non-implemented function');
+		logger.info('api.post - call to non-implemented function');
 		callback({err: 'not implemented'}, null);
 	}
 
