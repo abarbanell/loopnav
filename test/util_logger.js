@@ -17,7 +17,7 @@ it('check log level', function(done){
 		if (process.env.LOG_LEVEL) {
 			expect(logger.level).to.eql(process.env.LOG_LEVEL);
 		} else { 
-			expect(logger.level).to.eql('info');
+			expect(logger.level).to.eql('error');
 		}
 		done();
   });
